@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Mozaic — A Healthcare Design System (MediBuddy)
+   Every value here is lifted verbatim from the mb-design-system token
+   reference. Utilities resolve to these tokens so markup never carries a raw
+   hex, an off-scale spacing value, or an invented radius.
+
+   Mozaic is the authoritative token layer for Healthverse. The mb-uikit
+   `mb-*` scale and the mb-product-design `text-m-*` scale are deliberately
+   NOT mixed in — their accent ramps disagree with Mozaic's.
+   ========================================================================== */
+
+@theme {
+  /* --- Font ------------------------------------------------------------- */
+  --font-sans: var(--font-lexend-deca), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Base ------------------------------------------------------------- */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* --- Gray -------------------------------------------------------------- */
+  --color-gray-25: #f5f7f8;
+  --color-gray-50: #ebeef1;
+  --color-gray-100: #dbe0e6;
+  --color-gray-200: #bfc8d2;
+  --color-gray-300: #a4b0c0;
+  --color-gray-400: #8a99ad;
+  --color-gray-500: #70829b;
+  --color-gray-600: #596c86;
+  --color-gray-700: #47566a;
+  --color-gray-800: #364251;
+  --color-gray-900: #252d38;
+  --color-gray-950: #171b22;
+
+  /* --- Blue (brand primary) ---------------------------------------------- */
+  --color-blue-25: #f1f7ff;
+  --color-blue-50: #e2f0ff;
+  --color-blue-100: #c6e2ff;
+  --color-blue-200: #9acbff;
+  --color-blue-300: #72b3ff;
+  --color-blue-400: #4999ff;
+  --color-blue-500: #1f7df8;
+  --color-blue-600: #0066dc;
+  --color-blue-700: #004fb6;
+  --color-blue-800: #003c91;
+  --color-blue-900: #00296a;
+  --color-blue-950: #001846;
+
+  /* --- Red (error / brand secondary) -------------------------------------- */
+  --color-red-25: #fff4f5;
+  --color-red-50: #fee9ea;
+  --color-red-100: #fdd6d7;
+  --color-red-200: #fcb5b8;
+  --color-red-300: #fa9195;
+  --color-red-400: #f9696e;
+  --color-red-500: #f62f36;
+  --color-red-600: #d80008;
+  --color-red-700: #ae0006;
+  --color-red-800: #880005;
+  --color-red-900: #620004;
+  --color-red-950: #400002;
+
+  /* --- Green (success) ----------------------------------------------------- */
+  --color-green-25: #f8fbfa;
+  --color-green-50: #f1f8f5;
+  --color-green-100: #e0f8e8;
+  --color-green-200: #cce5d9;
+  --color-green-300: #a3d1bc;
+  --color-green-400: #7abd9d;
+  --color-green-500: #51a87f;
+  --color-green-600: #26935f;
+  --color-green-700: #0f7a48;
+  --color-green-800: #0c6139;
+  --color-green-900: #094b2c;
+  --color-green-950: #07341f;
+
+  /* --- Yellow (warning) ---------------------------------------------------- */
+  --color-yellow-25: #fffbe7;
+  --color-yellow-50: #fff7ce;
+  --color-yellow-100: #feef9d;
+  --color-yellow-200: #fcde64;
+  --color-yellow-300: #f6bf12;
+  --color-yellow-400: #e4a308;
+  --color-yellow-500: #cd8b08;
+  --color-yellow-600: #b57207;
+  --color-yellow-700: #9f5a07;
+  --color-yellow-800: #7f470a;
+  --color-yellow-900: #63350c;
+  --color-yellow-950: #46240b;
+
+  /* --- Orange (warning alt) ------------------------------------------------ */
+  --color-orange-25: #fffaf6;
+  --color-orange-50: #fff5ed;
+  --color-orange-100: #feebda;
+  --color-orange-200: #fcd9b8;
+  --color-orange-300: #faba7e;
+  --color-orange-400: #f89840;
+  --color-orange-500: #f27400;
+  --color-orange-600: #cd6300;
+  --color-orange-700: #ab5200;
+  --color-orange-800: #884100;
+  --color-orange-900: #693200;
+  --color-orange-950: #492300;
+
+  /* --- Cyan ---------------------------------------------------------------- */
+  --color-cyan-25: #f4fdfe;
+  --color-cyan-50: #e9fafd;
+  --color-cyan-100: #d2f5fc;
+  --color-cyan-200: #a4eaf8;
+  --color-cyan-300: #53d7f2;
+  --color-cyan-400: #20bfdf;
+  --color-cyan-500: #1ca6c1;
+  --color-cyan-600: #178da4;
+  --color-cyan-700: #147589;
+  --color-cyan-800: #105e6d;
+  --color-cyan-900: #0c4753;
+  --color-cyan-950: #08313a;
+
+  /* --- Purple -------------------------------------------------------------- */
+  --color-purple-25: #fafaff;
+  --color-purple-50: #f1edfe;
+  --color-purple-100: #e4dafd;
+  --color-purple-200: #d0befc;
+  --color-purple-300: #baa1fa;
+  --color-purple-400: #a584f9;
+  --color-purple-500: #8f65f8;
+  --color-purple-600: #7750d9;
+  --color-purple-700: #5e40ad;
+  --color-purple-800: #483185;
+  --color-purple-900: #33225c;
+  --color-purple-950: #1e1538;
+
+  /* --- Pink ---------------------------------------------------------------- */
+  --color-pink-25: #fef6fb;
+  --color-pink-50: #fde9f7;
+  --color-pink-100: #fbd4ef;
+  --color-pink-200: #f8b1e3;
+  --color-pink-300: #f48cd5;
+  --color-pink-400: #f162c6;
+  --color-pink-500: #db41ad;
+  --color-pink-600: #b63690;
+  --color-pink-700: #922b73;
+  --color-pink-800: #702159;
+  --color-pink-900: #4f173e;
+  --color-pink-950: #300e26;
+
+  /* --- Semantic aliases ----------------------------------------------------
+     Components reference these, not the raw scales above. */
+  --color-brand: var(--color-blue-600);
+  --color-brand-hover: var(--color-blue-700);
+  --color-brand-active: var(--color-blue-800);
+  --color-error: var(--color-red-500);
+  --color-error-hover: var(--color-red-600);
+  --color-success: var(--color-green-600);
+  --color-warning: var(--color-yellow-600);
+
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-700);
+  --color-text-placeholder: var(--color-gray-400);
+  --color-text-disabled: var(--color-gray-300);
+  --color-text-on-brand: var(--color-white);
+  --color-text-error: var(--color-red-600);
+
+  --color-bg-primary: var(--color-white);
+  --color-bg-secondary: var(--color-gray-25);
+  --color-bg-tertiary: var(--color-gray-50);
+  --color-bg-brand: var(--color-blue-600);
+  --color-bg-brand-subtle: var(--color-blue-25);
+  --color-bg-error: var(--color-red-25);
+  --color-bg-error-subtle: var(--color-red-50);
+  --color-bg-success: var(--color-green-25);
+  --color-bg-warning: var(--color-yellow-25);
+
+  --color-border-primary: var(--color-gray-200);
+  --color-border-secondary: var(--color-gray-300);
+  --color-border-brand: var(--color-blue-600);
+  --color-border-error: var(--color-red-500);
+  --color-border-disabled: var(--color-gray-200);
+
+  /* --- Spacing scale -------------------------------------------------------- */
+  --spacing-none: 0rem;
+  --spacing-xxs: 0.125rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.375rem;
+  --spacing-md: 0.5rem;
+  --spacing-lg: 0.75rem;
+  --spacing-xl: 1rem;
+  --spacing-2xl: 1.25rem;
+  --spacing-3xl: 1.5rem;
+  --spacing-4xl: 2rem;
+  --spacing-5xl: 2.5rem;
+  --spacing-6xl: 3rem;
+  --spacing-7xl: 4rem;
+  --spacing-8xl: 5rem;
+  --spacing-9xl: 6rem;
+  --spacing-10xl: 8rem;
+  --spacing-11xl: 10rem;
+
+  /* --- Border radius --------------------------------------------------------- */
+  --radius-none: 0rem;
+  --radius-xxs: 0.125rem;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* --- Elevation -------------------------------------------------------------- */
+  --shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-2: 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-3: 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-elevation-4: 0 8px 16px rgba(0, 0, 0, 0.08), 0 20px 48px rgba(0, 0, 0, 0.16);
+  --shadow-elevation-1-up: 0 -1px 2px rgba(0, 0, 0, 0.06), 0 -1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-2-up: 0 -2px 4px rgba(0, 0, 0, 0.06), 0 -4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-3-up: 0 -4px 8px rgba(0, 0, 0, 0.06), 0 -8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-elevation-4-up: 0 -8px 16px rgba(0, 0, 0, 0.08), 0 -20px 48px rgba(0, 0, 0, 0.16);
+
+  /* --- Mobile frame ----------------------------------------------------------
+     Locked to a fixed 360px mobile frame for now; breakpoints come later.
+     Mozaic's mobile grid is 360 - (16 x 2) = 328px of content. */
+  --container-frame: 22.5rem;
+  --container-frame-content: 20.5rem;
+}
+
+/* ==========================================================================
+   Named type styles — the Mozaic type scale, fixed (not fluid).
+   Display styles carry -2% tracking per the typography reference.
+   Size and weight are separate concerns so they compose without colliding.
+   ========================================================================== */
+
+@layer components {
+  .display-2xl { font-size: 4.5rem; line-height: 5.625rem; letter-spacing: -0.02em; }
+  .display-xl  { font-size: 3.75rem; line-height: 4.5rem; letter-spacing: -0.02em; }
+  .display-lg  { font-size: 3rem; line-height: 3.75rem; letter-spacing: -0.02em; }
+  .display-md  { font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.02em; }
+  .display-sm  { font-size: 1.875rem; line-height: 2.375rem; letter-spacing: -0.02em; }
+  .display-xs  { font-size: 1.5rem; line-height: 2rem; letter-spacing: -0.02em; }
+
+  .text-style-xl { font-size: 1.25rem; line-height: 1.875rem; }
+  .text-style-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .text-style-md { font-size: 1rem; line-height: 1.5rem; }
+  .text-style-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .text-style-xs { font-size: 0.75rem; line-height: 1.125rem; }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Design system focus ring on every focusable element. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

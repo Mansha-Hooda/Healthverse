@@ -1,0 +1,12 @@
+{
+  "_comment": "Assets to extract from the mb-design-system skill. Add an entry as each Figma section calls for it — keys are the exact `### ` heading in the skill's reference file, values are the generated React component name. Never add an asset that isn't in the reference files.",
+
+  "logos": {
+    "MB Primary Logo": "MediBuddyLogo",
+    "White Label MB Primary Logo": "MediBuddyLogoWhite"
+  },
+
+  "icons": {},
+
+  "illustrations": {}
+}

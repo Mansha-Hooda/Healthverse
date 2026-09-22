@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Figma reference renders, pulled down for visual comparison while building a
+# section. Disposable — the committed source of truth is figma-assets/.
+/.figma-ref/

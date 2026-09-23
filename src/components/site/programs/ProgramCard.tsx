@@ -154,7 +154,7 @@ export function ProgramCard({
               />
             </div>
             {partner.tier && (
-              <span className="text-style-sm font-medium text-text-primary">
+              <span className="text-body-md font-medium text-text-primary">
                 {partner.tier}
               </span>
             )}
@@ -164,21 +164,21 @@ export function ProgramCard({
 
       <div className="flex w-full flex-col gap-lg">
         <div className="flex w-full items-center gap-md">
-          <p className="text-style-sm font-medium text-text-primary">{name}</p>
+          <p className="text-body-md font-medium text-text-primary">{name}</p>
           <span
             aria-hidden
             className="size-1 shrink-0 rounded-full bg-text-secondary"
           />
-          <p className="text-style-sm text-text-secondary">{duration}</p>
+          <p className="text-body-md text-text-secondary">{duration}</p>
         </div>
 
         <div className="flex w-full items-center justify-between">
-          <p className="text-style-sm font-semibold text-text-primary">
+          <p className="text-body-md font-semibold text-text-primary">
             {price}
           </p>
           <a
             href={href}
-            className="flex items-center justify-center gap-sm rounded-xs text-style-sm font-semibold text-blue-700 drop-shadow-figma-xs"
+            className="flex items-center justify-center gap-sm rounded-xs text-body-md font-semibold text-blue-700 drop-shadow-figma-xs"
           >
             Details
             <IconArrowRight className="size-4 shrink-0" />

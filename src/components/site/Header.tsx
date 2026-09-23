@@ -36,7 +36,7 @@ export function Header({
 
         <p className="flex items-center gap-xs">
           <IconLocation className="size-4 shrink-0 text-text-primary" />
-          <span className="text-style-sm font-semibold text-text-primary">
+          <span className="text-body-md font-semibold text-text-primary">
             {location}
           </span>
         </p>

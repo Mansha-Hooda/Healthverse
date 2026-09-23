@@ -111,14 +111,26 @@ Size and weight are separate — combine a size class with `font-medium` /
 
 | Class | Size / line-height | Use |
 |---|---|---|
-| `display-2xl` … `display-xs` | 72/90 → 24/32, −2% tracking | Display headings |
-| `text-style-xl` | 20 / 30 | |
-| `text-style-lg` | 18 / 28 | |
-| `text-style-md` | 16 / 24 | Section headings, button labels |
-| `text-style-sm` | 14 / 20 | Body, card text |
-| `text-style-xs` | 12 / 18 | |
-| `text-caption-md` | 10 / 16 | Micro labels only — below Mozaic's floor |
-| `marketing-heading-5` | 20 / 1.35, **Lora** | Marketing hero only |
+Type classes are named after the **Figma variable groups**, not Mozaic.
+
+| Class | Size / LH | Figma variable | Figma style | Use |
+|---|---|---|---|---|
+| `text-caption-md` | 10 / 16 | `Group/Mobile/Caption-md` | `Mobile/M-Label/S-semibold` | Micro labels |
+| `text-body-md` | 14 / 20 | `Group/Mobile/Body-md` | `Mobile/M-Title/M-*`, `M-Body/M-*` | Body, card text |
+| `text-heading-sm` | 16 / 24 | `Group/Mobile/Heading-sm` | `Mobile/M-Title/L-semibold` | Section headings |
+| `text-marketing-body-sm` | 16 / 24 | `Marketing/Mobile/Body-sm` | `Mobile/Body/S-semibold` | Marketing buttons |
+| `marketing-heading-5` | 20 / 1.35, **Lora** | `Marketing/Mobile/Heading5-Semibold` | — | Marketing hero |
+
+> ⚠️ **Figma and Mozaic label sizes inversely.** In Figma, `body-md` = 14 and
+> `body-l` / `heading-sm` = 16. In Mozaic and Tailwind, `md` = 16 and `sm` = 14.
+> These classes follow **Figma**, so `md` here means 14px. Don't "correct" it.
+
+`text-heading-sm` and `text-marketing-body-sm` share metrics (16/24) but come
+from different Figma scales — kept separate so each usage's provenance stays
+readable.
+
+Only sizes present in the Figma frame are defined. When a new section needs
+another, add it under its real Figma name rather than extrapolating.
 
 ### Layout
 

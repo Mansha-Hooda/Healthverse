@@ -254,32 +254,41 @@
 }
 
 /* ==========================================================================
-   Named type styles — the Mozaic type scale, fixed (not fluid).
-   Display styles carry -2% tracking per the typography reference.
-   Size and weight are separate concerns so they compose without colliding.
+   Type styles — named after the Figma variable groups, NOT the Mozaic scale.
+
+   The two systems label sizes inversely, which is why Figma's names win here:
+
+       Figma / ui-kit      Mozaic          px
+       body-md             text-sm         14
+       body-l  / heading-sm text-md        16
+
+   Adopting Mozaic's names would mean `md` meant 16 in code and 14 in the
+   design file. These classes set size and line-height only — combine with
+   font-medium / font-semibold for the weight half of a Figma style.
+
+   Only sizes actually present in the Figma frame are defined. When a new
+   section needs another, add it here under its real Figma name rather than
+   extrapolating the scale.
    ========================================================================== */
 
 @layer components {
-  .display-2xl { font-size: 4.5rem; line-height: 5.625rem; letter-spacing: -0.02em; }
-  .display-xl  { font-size: 3.75rem; line-height: 4.5rem; letter-spacing: -0.02em; }
-  .display-lg  { font-size: 3rem; line-height: 3.75rem; letter-spacing: -0.02em; }
-  .display-md  { font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.02em; }
-  .display-sm  { font-size: 1.875rem; line-height: 2.375rem; letter-spacing: -0.02em; }
-  .display-xs  { font-size: 1.5rem; line-height: 2rem; letter-spacing: -0.02em; }
-
-  .text-style-xl { font-size: 1.25rem; line-height: 1.875rem; }
-  .text-style-lg { font-size: 1.125rem; line-height: 1.75rem; }
-  .text-style-md { font-size: 1rem; line-height: 1.5rem; }
-  .text-style-sm { font-size: 0.875rem; line-height: 1.25rem; }
-  .text-style-xs { font-size: 0.75rem; line-height: 1.125rem; }
-
-  /* Figma `Group/Mobile/Caption-md-Semibold` — 10px/16px. Below Mozaic's
-     12px floor, so it has no Mozaic equivalent. Label use only, never
-     running text. */
+  /* Group/Mobile/Caption-md — 10/16. Micro labels only. */
   .text-caption-md { font-size: 0.625rem; line-height: 1rem; }
 
-  /* Marketing type — Figma's `Marketing/Mobile/Heading5-Semibold`. Sits
-     outside the Mozaic scale and pairs with --font-marketing (Lora). */
+  /* Group/Mobile/Body-md — 14/20. The workhorse body size. */
+  .text-body-md { font-size: 0.875rem; line-height: 1.25rem; }
+
+  /* Group/Mobile/Heading-sm — 16/24. Section headings.
+     Figma style name: Mobile/M-Title/L-semibold. */
+  .text-heading-sm { font-size: 1rem; line-height: 1.5rem; }
+
+  /* Marketing/Mobile/Body-sm — 16/24. Same metrics as heading-sm but from
+     the marketing scale, where 16 is called `sm` rather than `l`. Kept
+     separate so the provenance of each usage stays readable.
+     Figma style name: Mobile/Body/S-semibold. */
+  .text-marketing-body-sm { font-size: 1rem; line-height: 1.5rem; }
+
+  /* Marketing/Mobile/Heading5-Semibold — 20/1.35, Lora. */
   .marketing-heading-5 {
     font-family: var(--font-marketing);
     font-size: 1.25rem;

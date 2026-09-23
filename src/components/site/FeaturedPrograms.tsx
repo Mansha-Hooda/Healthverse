@@ -59,7 +59,7 @@ export function FeaturedPrograms() {
     >
       <h2
         id="featured-programs"
-        className="text-style-md font-semibold text-text-primary"
+        className="text-heading-sm font-semibold text-text-primary"
       >
         Featured Programs
       </h2>
@@ -75,7 +75,7 @@ export function FeaturedPrograms() {
           href="#"
           className="flex w-full items-center justify-center gap-sm rounded-md bg-bg-primary px-xl py-[10px] shadow-figma-xs inset-ring-1 inset-ring-blue-300"
         >
-          <span className="px-xxs text-style-md font-semibold text-brand">
+          <span className="px-xxs text-marketing-body-sm font-semibold text-brand">
             See All
           </span>
         </a>

@@ -59,7 +59,7 @@ export function FeaturedPrograms() {
     >
       <h2
         id="featured-programs"
-        className="text-heading-sm font-semibold text-text-primary"
+        className="m-title-l-semibold text-textcolor-grey-900-primary"
       >
         Featured Programs
       </h2>
@@ -75,7 +75,7 @@ export function FeaturedPrograms() {
           href="#"
           className="flex w-full items-center justify-center gap-sm rounded-md bg-button-secondary-bg px-xl py-[10px] shadow-xs inset-ring-1 inset-ring-button-secondary-border"
         >
-          <span className="px-xxs text-marketing-body-sm font-semibold text-button-secondary-fg">
+          <span className="px-xxs body-s-semibold text-button-secondary-fg">
             See All
           </span>
         </a>

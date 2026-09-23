@@ -14,7 +14,7 @@ function iconAria(label?: string) {
     : ({ "aria-hidden": true as const, focusable: false as const });
 }
 
-export function IconArrowRight({ className, label }: IconProps) {
+export function IconArrowRight01({ className, label }: IconProps) {
   return (
     <svg
       viewBox="0 0 16 16"

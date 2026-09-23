@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${lexendDeca.variable} ${lora.variable} h-full`}>
-      <body className="min-h-full bg-gray-light-mode-25 text-text-primary">
+      <body className="min-h-full bg-gray-light-mode-25 text-textcolor-grey-900-primary">
         {/* Locked to a fixed 360px mobile frame. Centring it on a tinted
             backdrop keeps the frame edges visible when reviewing on a desktop
             screen. Responsive breakpoints come later. */}

@@ -1,8 +1,8 @@
 import {
-  IconArrowLeft,
+  IconArrowLeft02,
   IconCall,
-  IconLocation,
-  IconWallet,
+  IconLocation06,
+  IconMedsWallet,
 } from "@/components/icons/header";
 
 type HeaderProps = {
@@ -29,14 +29,14 @@ export function Header({
         <button
           type="button"
           aria-label="Go back"
-          className="flex size-6 items-center justify-center text-text-primary"
+          className="flex size-6 items-center justify-center text-textcolor-grey-900-primary"
         >
-          <IconArrowLeft className="size-6" />
+          <IconArrowLeft02 className="size-6" />
         </button>
 
         <p className="flex items-center gap-xs">
-          <IconLocation className="size-4 shrink-0 text-text-primary" />
-          <span className="text-body-md font-semibold text-text-primary">
+          <IconLocation06 className="size-4 shrink-0 text-textcolor-grey-900-primary" />
+          <span className="m-title-m-semibold text-textcolor-grey-900-primary">
             {location}
           </span>
         </p>
@@ -49,12 +49,12 @@ export function Header({
         <button
           type="button"
           aria-label={`Wallet, balance ${walletBalance}`}
-          className="relative flex h-6 w-[2.875rem] items-center text-text-primary"
+          className="relative flex h-6 w-[2.875rem] items-center text-textcolor-grey-900-primary"
         >
-          <IconWallet className="size-6 shrink-0" />
+          <IconMedsWallet className="size-6 shrink-0" />
           <span
             aria-hidden
-            className="absolute -top-sm left-lg rounded-md border border-base-white bg-brand-600 px-[0.3125rem] py-px text-[0.625rem]/[0.875rem] font-semibold text-base-white"
+            className="absolute -top-sm left-lg rounded-md border border-base-white bg-brand-blue-600 px-[0.3125rem] py-px text-[0.625rem]/[0.875rem] font-semibold text-base-white"
           >
             {walletBalance}
           </span>
@@ -63,7 +63,7 @@ export function Header({
         <a
           href="tel:+918047183456"
           aria-label="Call support"
-          className="flex size-6 items-center justify-center text-text-primary"
+          className="flex size-6 items-center justify-center text-textcolor-grey-900-primary"
         >
           <IconCall className="size-6" />
         </a>

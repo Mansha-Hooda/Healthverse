@@ -27,10 +27,11 @@ ROOT = os.path.dirname(HERE)
 ASSETS = os.path.join(ROOT, "figma-assets")
 OUT_DIR = os.path.join(ROOT, "src", "components", "icons")
 
-# Both greys in the exported header assets collapse to Mozaic Gray-900, per an
-# explicit decision: the Figma file carries #2E3742 in a legacy variable
-# collection alongside #252D38 in the one flagged current. Emitting
-# currentColor lets each call site supply a Mozaic token instead.
+# Both greys in the exported header assets collapse to
+# textcolor/Grey 900 - Primary (#252D38), per an explicit decision: the Figma
+# file carries #2E3742 in a legacy collection, and the handoff annotation
+# specifies #252D38. Emitting currentColor lets each call site supply the
+# token instead.
 INHERIT = ("#252D38", "#2E3742")
 
 BOX = 24.0  # every header icon box, in px
@@ -109,11 +110,11 @@ GROUPS = {
     "header.tsx": (
         'header node 1061:19797',
         [
-            ("IconArrowLeft", simple, "arrow-left-02.svg"),
-            ("IconLocation", simple, "location-06.svg"),
+            ("IconArrowLeft02", simple, "arrow-left-02.svg"),
+            ("IconLocation06", simple, "location-06.svg"),
             ("IconCall", simple, "call.svg"),
             (
-                "IconWallet",
+                "IconMedsWallet",
                 composed,
                 [
                     ("wallet-p77486.svg", (9.52, 6.95, 13.38, 4.76)),
@@ -129,7 +130,7 @@ GROUPS = {
     "programs.tsx": (
         "featured programs node 1050:6683",
         [
-            ("IconArrowRight", simple, "arrow-right-01.svg"),
+            ("IconArrowRight01", simple, "arrow-right-01.svg"),
         ],
     ),
 }

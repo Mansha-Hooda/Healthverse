@@ -21,7 +21,7 @@ component below records the Figma node it came from.
 > the frame width.
 >
 > Lexend Deca is the product typeface. Lora is used **only** for marketing
-> headings via `.marketing-heading-5` — never for body or UI text.
+> headings via `.marketing-heading5-semibold` — never for body or UI text.
 >
 > If a value you need has no token, stop and ask rather than inventing one.
 
@@ -57,13 +57,13 @@ Semantic tokens (prefer these):
 
 | Utility | Token | Value |
 |---|---|---|
-| `text-text-primary` | `Colors/text ✅/text-primary (900)` | `#252D38` |
-| `text-text-secondary`, `bg-text-secondary` | `Colors/text ✅/text-secondary (700)` | `#47566A` |
-| `bg-base-white`, `text-base-white`, `border-base-white` | `Colors/base/white` | `#FFFFFF` |
-| `bg-brand-600` | `Colors/brand/600` | `#0066DC` |
-| `text-brand-700` | `Colors/brand/700` | `#004FB6` |
-| `inset-ring-gray-light-mode-100` | `Colors/gray-light-mode/100` | `#DBE0E6` |
-| `bg-gray-light-mode-25` | `Colors/gray-light-mode/25` | `#F5F7F8` |
+| `text-textcolor-grey-900-primary` | `textcolor/Grey 900 - Primary` | `#252D38` |
+| `text-textcolor-grey-700-secondary`, `bg-textcolor-grey-700-secondary` | `textcolor/Grey 700 - Secondary` | `#47566A` |
+| `bg-base-white`, `text-base-white`, `border-base-white` | `base/white` | `#FFFFFF` |
+| `bg-brand-blue-600` | `brand-blue/600` | `#0066DC` |
+| `text-brand-blue-700` | `brand-blue/700` | `#004FB6` |
+| `inset-ring-gray-light-mode-100` | `gray-light-mode/100` | `#DBE0E6` |
+| `bg-gray-light-mode-25` | `gray-light-mode/25` | `#F5F7F8` |
 | `from-cyan-900` / `to-cyan-700` | `Colors/cyan/*` | `#0C4753` / `#147589` |
 | `bg-{cyan,pink,purple}-100` / `-25` | `Colors/<hue>/*` | card themes |
 
@@ -76,12 +76,12 @@ Semantic tokens (prefer these):
 | `text-button-secondary-fg` | `button-secondary-color-fg` | `#0066DC` |
 
 Full ramps are available as `{bg,text,border,inset-ring}-<ramp>-<step>` for
-**gray-light-mode, brand, red, green, yellow, orange, cyan, purple, pink** at
+**gray-light-mode, brand-blue, red, green, yellow, orange, cyan, purple, pink** at
 steps `25 · 50 · 100 · 200 · 300 · 400 · 500 · 600 · 700 · 800 · 900 · 950`,
 plus `base-white` and `base-black`.
 
 > Note the ramp names: Figma calls the neutral ramp **`gray-light-mode`** and
-> the blue ramp **`brand`**. There is no `gray-*` or `blue-*` utility here.
+> the blue ramp **`brand-blue`**. There is no `gray-*` or `blue-*` utility here.
 
 ### Spacing — `p-*`, `m-*`, `gap-*`, etc.
 
@@ -119,31 +119,30 @@ Example: `px-xl` = 16px, `gap-md` = 8px, `pt-4xl` = 32px.
 
 ### Type
 
-Size and weight are separate — combine a size class with `font-medium` /
-`font-semibold` / `font-bold`.
+One class per **Figma text style**. Figma styles bundle size, line-height
+**and weight**, so these classes do too — never pair them with a separate
+`font-*` utility, the weight is already set.
 
-| Class | Size / line-height | Use |
-|---|---|---|
-Type classes are named after the **Figma variable groups**, not Mozaic.
+Size suffixes follow Figma: **S = 10, M = 14, L = 16**.
 
-| Class | Size / LH | Figma variable | Figma style | Use |
-|---|---|---|---|---|
-| `text-caption-md` | 10 / 16 | `Group/Mobile/Caption-md` | `Mobile/M-Label/S-semibold` | Micro labels |
-| `text-body-md` | 14 / 20 | `Group/Mobile/Body-md` | `Mobile/M-Title/M-*`, `M-Body/M-*` | Body, card text |
-| `text-heading-sm` | 16 / 24 | `Group/Mobile/Heading-sm` | `Mobile/M-Title/L-semibold` | Section headings |
-| `text-marketing-body-sm` | 16 / 24 | `Marketing/Mobile/Body-sm` | `Mobile/Body/S-semibold` | Marketing buttons |
-| `marketing-heading-5` | 20 / 1.35, **Lora** | `Marketing/Mobile/Heading5-Semibold` | — | Marketing hero |
+| Class | Size / LH / weight | Figma style | Use |
+|---|---|---|---|
+| `m-label-s-semibold` | 10 / 16 / 600 | `Mobile/M-Label/S-semibold` | Micro labels ("By Partner") |
+| `m-body-m-regular` | 14 / 20 / 400 | `Mobile/M-Body/M-regular` | Body copy (duration) |
+| `m-title-m-medium` | 14 / 20 / 500 | `Mobile/M-Title/M-medium` | Card title, partner tier |
+| `m-title-m-semibold` | 14 / 20 / 600 | `Mobile/M-Title/M-semibold` | Location label, price, Details |
+| `m-title-l-semibold` | 16 / 24 / 600 | `Mobile/M-Title/L-semibold` | Section headings |
+| `body-s-semibold` | 16 / 24 / 600 | `Mobile/Body/S-semibold` | Marketing buttons (See All) |
+| `marketing-heading5-semibold` | 20 / 1.35 / 600, **Lora** | `Marketing/Mobile/Heading5-Semibold` | Marketing hero |
 
-> ⚠️ **Figma and Mozaic label sizes inversely.** In Figma, `body-md` = 14 and
-> `body-l` / `heading-sm` = 16. In Mozaic and Tailwind, `md` = 16 and `sm` = 14.
-> These classes follow **Figma**, so `md` here means 14px. Don't "correct" it.
+> ⚠️ In the **marketing** scale `S` means 16, not 10 — so `body-s-semibold`
+> and `m-title-l-semibold` are both 16/24. They are kept separate so each
+> usage's provenance stays readable.
 
-`text-heading-sm` and `text-marketing-body-sm` share metrics (16/24) but come
-from different Figma scales — kept separate so each usage's provenance stays
-readable.
+Every class sets `letter-spacing: 0`, matching the Figma annotations.
 
-Only sizes present in the Figma frame are defined. When a new section needs
-another, add it under its real Figma name rather than extrapolating.
+Only styles present in the Figma frame are defined. When a new section needs
+another, add it under its real Figma style name rather than extrapolating.
 
 ### Layout
 
@@ -162,8 +161,8 @@ src/
   components/
     brand/logos.tsx     MediBuddyLogo, MediBuddyLogoWhite
     icons/
-      header.tsx        IconArrowLeft, IconLocation, IconCall, IconWallet
-      programs.tsx      IconArrowRight
+      header.tsx        IconArrowLeft02, IconLocation06, IconCall, IconMedsWallet
+      programs.tsx      IconArrowRight01
     site/
       Header.tsx          section 1
       Hero.tsx            section 2
@@ -226,7 +225,7 @@ Asymmetric corners `rounded-tl-md rounded-tr-5xl rounded-br-md rounded-bl-5xl`
 Two things to preserve when editing:
 - **`/srgb`** pins gradient interpolation to match Figma. Tailwind v4 defaults
   to oklab, which shifts the midtones even with identical stops.
-- The heading uses `marketing-heading-5` (**Lora**). This is the only place
+- The heading uses `marketing-heading5-semibold` (**Lora**). This is the only place
   Lora appears.
 
 ### `FeaturedPrograms` — `src/components/site/FeaturedPrograms.tsx`
@@ -289,7 +288,7 @@ shifts the composition. Everything the user reads still uses tokens.
 **"Figma extensions" block in `globals.css`.** Values the Figma file
 specifies that Mozaic has no token for, kept in one reviewable list:
 `--radius-5xl` (32px), `--shadow-elevation-1`, `--shadow-xs`,
-`--drop-shadow-xs`, plus `.text-caption-md` and `.marketing-heading-5`.
+`--drop-shadow-xs`, plus `.m-label-s-semibold` and `.marketing-heading5-semibold`.
 Add here — not inline — if another genuinely unavoidable value appears.
 
 **`next/image` lazy-loads.** Screenshots taken immediately after an edit can
@@ -314,7 +313,7 @@ MB_SKILL_DIR=<path-to-mb-design-system> python3 scripts/extract-mozaic-assets.py
 
 To add an icon: export the SVG from Figma into `figma-assets/`, add an entry
 to `GROUPS` in `build-figma-icons.py`, re-run. Icons emit `currentColor`, so
-colour them with a token at the call site (`text-text-primary`).
+colour them with a token at the call site (`text-textcolor-grey-900-primary`).
 
 Figma asset URLs expire after ~7 days, which is why the exports are committed.
 

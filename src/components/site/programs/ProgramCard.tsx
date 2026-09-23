@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IconArrowRight } from "@/components/icons/programs";
+import { IconArrowRight01 } from "@/components/icons/programs";
 import {
   ART_CULT,
   DIAMONDS,
@@ -131,7 +131,7 @@ export function ProgramCard({
           className="absolute left-[15px] flex w-[162.927px] -translate-y-1/2 flex-col gap-xs"
           style={{ top: `calc(50% - ${partnerOffset}px)` }}
         >
-          <p className="text-caption-md font-semibold text-text-primary">
+          <p className="m-label-s-semibold text-textcolor-grey-900-primary">
             By Partner
           </p>
           <div className="flex items-center gap-xs">
@@ -154,7 +154,7 @@ export function ProgramCard({
               />
             </div>
             {partner.tier && (
-              <span className="text-body-md font-medium text-text-primary">
+              <span className="m-title-m-medium text-textcolor-grey-900-primary">
                 {partner.tier}
               </span>
             )}
@@ -164,24 +164,24 @@ export function ProgramCard({
 
       <div className="flex w-full flex-col gap-lg">
         <div className="flex w-full items-center gap-md">
-          <p className="text-body-md font-medium text-text-primary">{name}</p>
+          <p className="m-title-m-medium text-textcolor-grey-900-primary">{name}</p>
           <span
             aria-hidden
-            className="size-1 shrink-0 rounded-full bg-text-secondary"
+            className="size-1 shrink-0 rounded-full bg-textcolor-grey-700-secondary"
           />
-          <p className="text-body-md text-text-secondary">{duration}</p>
+          <p className="m-body-m-regular text-textcolor-grey-700-secondary">{duration}</p>
         </div>
 
         <div className="flex w-full items-center justify-between">
-          <p className="text-body-md font-semibold text-text-primary">
+          <p className="m-title-m-semibold text-textcolor-grey-900-primary">
             {price}
           </p>
           <a
             href={href}
-            className="flex items-center justify-center gap-sm rounded-xs text-body-md font-semibold text-brand-700 drop-shadow-xs"
+            className="flex items-center justify-center gap-sm rounded-xs m-title-m-semibold text-brand-blue-700 drop-shadow-xs"
           >
             Details
-            <IconArrowRight className="size-4 shrink-0" />
+            <IconArrowRight01 className="size-4 shrink-0" />
           </a>
         </div>
       </div>

@@ -14,7 +14,7 @@ function iconAria(label?: string) {
     : ({ "aria-hidden": true as const, focusable: false as const });
 }
 
-export function IconArrowLeft({ className, label }: IconProps) {
+export function IconArrowLeft02({ className, label }: IconProps) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -30,7 +30,7 @@ export function IconArrowLeft({ className, label }: IconProps) {
   );
 }
 
-export function IconLocation({ className, label }: IconProps) {
+export function IconLocation06({ className, label }: IconProps) {
   return (
     <svg
       viewBox="0 0 16 16"
@@ -65,7 +65,7 @@ export function IconCall({ className, label }: IconProps) {
   );
 }
 
-export function IconWallet({ className, label }: IconProps) {
+export function IconMedsWallet({ className, label }: IconProps) {
   return (
     <svg
       viewBox="0 0 24 24"

@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Design tokens — named after the Figma variable collections.
+   Design tokens — named after the Figma component annotations.
 
-   Values come from the MediBuddy Mozaic design system; the *names* follow the
-   Figma file so a token means the same thing in the design and in the code.
-   Where the two disagree on naming, Figma wins:
+   Names follow the style / colour names a designer picks in Figma and that
+   appear in the handoff table, not the underlying variable groups:
 
-       Figma                       Mozaic            here
-       Colors/base/white           white             base-white
-       Colors/gray-light-mode/100  gray-100          gray-light-mode-100
-       Colors/brand/700            blue-700          brand-700
-       shadow/elevation-1          elevation-1       elevation-1 (Figma value)
+       Figma annotation                  token here
+       Mobile/M-Title/M-semibold         .m-title-m-semibold
+       textcolor/Grey 900 - Primary      --color-textcolor-grey-900-primary
+       brand-blue/700                    --color-brand-blue-700
+       gray-light-mode/100               --color-gray-light-mode-100
+       shadow/elevation-1                --shadow-elevation-1
 
-   Only ramps and aliases the Figma file actually names are defined. Adding an
-   invented token reintroduces exactly the drift this file exists to prevent.
+   Values come from the MediBuddy Mozaic design system; only the naming is
+   Figma's. Adding a token Figma does not name reintroduces the drift this
+   file exists to prevent.
    ========================================================================== */
 
 @theme {
@@ -23,11 +24,15 @@
   /* Marketing headings only — see the type styles below. */
   --font-marketing: var(--font-lora), Georgia, "Times New Roman", serif;
 
-  /* --- Colors/base ------------------------------------------------------- */
+  /* --- base ------------------------------------------------------------- */
   --color-base-white: #ffffff;
   --color-base-black: #000000;
 
-  /* --- Colors/gray-light-mode -------------------------------------------- */
+  /* --- textcolor -------------------------------------------------------- */
+  --color-textcolor-grey-900-primary: #252d38;
+  --color-textcolor-grey-700-secondary: #47566a;
+
+  /* --- gray-light-mode -------------------------------------------------- */
   --color-gray-light-mode-25: #f5f7f8;
   --color-gray-light-mode-50: #ebeef1;
   --color-gray-light-mode-100: #dbe0e6;
@@ -41,77 +46,24 @@
   --color-gray-light-mode-900: #252d38;
   --color-gray-light-mode-950: #171b22;
 
-  /* --- Colors/brand (Figma also spells this brand-blue) ------------------- */
-  --color-brand-25: #f1f7ff;
-  --color-brand-50: #e2f0ff;
-  --color-brand-100: #c6e2ff;
-  --color-brand-200: #9acbff;
-  --color-brand-300: #72b3ff;
-  --color-brand-400: #4999ff;
-  --color-brand-500: #1f7df8;
-  --color-brand-600: #0066dc;
-  --color-brand-700: #004fb6;
-  --color-brand-800: #003c91;
-  --color-brand-900: #00296a;
-  --color-brand-950: #001846;
+  /* --- brand-blue -------------------------------------------------------- */
+  --color-brand-blue-25: #f1f7ff;
+  --color-brand-blue-50: #e2f0ff;
+  --color-brand-blue-100: #c6e2ff;
+  --color-brand-blue-200: #9acbff;
+  --color-brand-blue-300: #72b3ff;
+  --color-brand-blue-400: #4999ff;
+  --color-brand-blue-500: #1f7df8;
+  --color-brand-blue-600: #0066dc;
+  --color-brand-blue-700: #004fb6;
+  --color-brand-blue-800: #003c91;
+  --color-brand-blue-900: #00296a;
+  --color-brand-blue-950: #001846;
 
-  /* --- Colors/red --------------------------------------------------------- */
-  --color-red-25: #fff4f5;
-  --color-red-50: #fee9ea;
-  --color-red-100: #fdd6d7;
-  --color-red-200: #fcb5b8;
-  --color-red-300: #fa9195;
-  --color-red-400: #f9696e;
-  --color-red-500: #f62f36;
-  --color-red-600: #d80008;
-  --color-red-700: #ae0006;
-  --color-red-800: #880005;
-  --color-red-900: #620004;
-  --color-red-950: #400002;
-
-  /* --- Colors/green ------------------------------------------------------- */
-  --color-green-25: #f8fbfa;
-  --color-green-50: #f1f8f5;
-  --color-green-100: #e0f8e8;
-  --color-green-200: #cce5d9;
-  --color-green-300: #a3d1bc;
-  --color-green-400: #7abd9d;
-  --color-green-500: #51a87f;
-  --color-green-600: #26935f;
-  --color-green-700: #0f7a48;
-  --color-green-800: #0c6139;
-  --color-green-900: #094b2c;
-  --color-green-950: #07341f;
-
-  /* --- Colors/yellow ------------------------------------------------------ */
-  --color-yellow-25: #fffbe7;
-  --color-yellow-50: #fff7ce;
-  --color-yellow-100: #feef9d;
-  --color-yellow-200: #fcde64;
-  --color-yellow-300: #f6bf12;
-  --color-yellow-400: #e4a308;
-  --color-yellow-500: #cd8b08;
-  --color-yellow-600: #b57207;
-  --color-yellow-700: #9f5a07;
-  --color-yellow-800: #7f470a;
-  --color-yellow-900: #63350c;
-  --color-yellow-950: #46240b;
-
-  /* --- Colors/orange ------------------------------------------------------ */
-  --color-orange-25: #fffaf6;
-  --color-orange-50: #fff5ed;
-  --color-orange-100: #feebda;
-  --color-orange-200: #fcd9b8;
-  --color-orange-300: #faba7e;
-  --color-orange-400: #f89840;
-  --color-orange-500: #f27400;
-  --color-orange-600: #cd6300;
-  --color-orange-700: #ab5200;
-  --color-orange-800: #884100;
-  --color-orange-900: #693200;
-  --color-orange-950: #492300;
-
-  /* --- Colors/cyan -------------------------------------------------------- */
+  /* --- tertiary-color-palettes ------------------------------------------
+     Figma spells these both as `Colors/<hue>/<step>` and
+     `tertiary-color-palettes/<Hue> Palette/<step>`. The short form is used
+     here; the values are identical either way. */
   --color-cyan-25: #f4fdfe;
   --color-cyan-50: #e9fafd;
   --color-cyan-100: #d2f5fc;
@@ -125,7 +77,6 @@
   --color-cyan-900: #0c4753;
   --color-cyan-950: #08313a;
 
-  /* --- Colors/purple ------------------------------------------------------ */
   --color-purple-25: #fafaff;
   --color-purple-50: #f1edfe;
   --color-purple-100: #e4dafd;
@@ -139,7 +90,6 @@
   --color-purple-900: #33225c;
   --color-purple-950: #1e1538;
 
-  /* --- Colors/pink -------------------------------------------------------- */
   --color-pink-25: #fef6fb;
   --color-pink-50: #fde9f7;
   --color-pink-100: #fbd4ef;
@@ -153,17 +103,64 @@
   --color-pink-900: #4f173e;
   --color-pink-950: #300e26;
 
-  /* --- Colors/text ✅ ------------------------------------------------------ */
-  --color-text-primary: #252d38;
-  --color-text-secondary: #47566a;
+  --color-red-25: #fff4f5;
+  --color-red-50: #fee9ea;
+  --color-red-100: #fdd6d7;
+  --color-red-200: #fcb5b8;
+  --color-red-300: #fa9195;
+  --color-red-400: #f9696e;
+  --color-red-500: #f62f36;
+  --color-red-600: #d80008;
+  --color-red-700: #ae0006;
+  --color-red-800: #880005;
+  --color-red-900: #620004;
+  --color-red-950: #400002;
 
-  /* --- component-colors/components/buttons ✅/secondary-color ✅ ------------ */
+  --color-green-25: #f8fbfa;
+  --color-green-50: #f1f8f5;
+  --color-green-100: #e0f8e8;
+  --color-green-200: #cce5d9;
+  --color-green-300: #a3d1bc;
+  --color-green-400: #7abd9d;
+  --color-green-500: #51a87f;
+  --color-green-600: #26935f;
+  --color-green-700: #0f7a48;
+  --color-green-800: #0c6139;
+  --color-green-900: #094b2c;
+  --color-green-950: #07341f;
+
+  --color-yellow-25: #fffbe7;
+  --color-yellow-50: #fff7ce;
+  --color-yellow-100: #feef9d;
+  --color-yellow-200: #fcde64;
+  --color-yellow-300: #f6bf12;
+  --color-yellow-400: #e4a308;
+  --color-yellow-500: #cd8b08;
+  --color-yellow-600: #b57207;
+  --color-yellow-700: #9f5a07;
+  --color-yellow-800: #7f470a;
+  --color-yellow-900: #63350c;
+  --color-yellow-950: #46240b;
+
+  --color-orange-25: #fffaf6;
+  --color-orange-50: #fff5ed;
+  --color-orange-100: #feebda;
+  --color-orange-200: #fcd9b8;
+  --color-orange-300: #faba7e;
+  --color-orange-400: #f89840;
+  --color-orange-500: #f27400;
+  --color-orange-600: #cd6300;
+  --color-orange-700: #ab5200;
+  --color-orange-800: #884100;
+  --color-orange-900: #693200;
+  --color-orange-950: #492300;
+
+  /* --- component-colors/components/buttons/secondary-color --------------- */
   --color-button-secondary-bg: #ffffff;
   --color-button-secondary-border: #72b3ff;
   --color-button-secondary-fg: #0066dc;
 
-  /* --- Spacing scale -------------------------------------------------------
-     Figma and Mozaic agree on these names exactly. */
+  /* --- Spacing ----------------------------------------------------------- */
   --spacing-none: 0rem;
   --spacing-xxs: 0.125rem;
   --spacing-xs: 0.25rem;
@@ -182,8 +179,7 @@
   --spacing-10xl: 8rem;
   --spacing-11xl: 10rem;
 
-  /* --- Border radius -------------------------------------------------------
-     Also identical in both systems, except 5xl. */
+  /* --- Border radius ----------------------------------------------------- */
   --radius-none: 0rem;
   --radius-xxs: 0.125rem;
   --radius-xs: 0.25rem;
@@ -195,69 +191,87 @@
   --radius-3xl: 1.25rem;
   --radius-4xl: 1.5rem;
   --radius-full: 9999px;
-  /* 32px marketing banner corner. Neither Mozaic nor the Figma radius
-     collection names this; taken from the hero frame (1050:6680). */
+  /* 32px marketing banner corner — hero frame 1050:6680, unnamed in Figma. */
   --radius-5xl: 2rem;
 
-  /* --- Elevation -----------------------------------------------------------
-     Figma's own shadow scale. Note these are NOT Mozaic's elevation values —
-     Mozaic's elevation-1 is markedly heavier. Figma governs this build, so
-     its values carry the plain names. */
+  /* --- Elevation ---------------------------------------------------------- */
   /* shadow/elevation-1 */
   --shadow-elevation-1:
     0 1px 1px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.04);
   /* uui-shadows/shadow-xs */
   --shadow-xs: 0 1px 2px rgba(23, 27, 34, 0.05);
-  /* Colors/Effects/Shadows 📌/shadow-xs, applied as a filter */
+  /* Colors/Effects/Shadows/shadow-xs, applied as a filter */
   --drop-shadow-xs: 0 1px 1px rgba(23, 27, 34, 0.05);
 
-  /* --- Mobile frame --------------------------------------------------------
-     Locked to a fixed 360px mobile frame for now; breakpoints come later.
-     The mobile grid is 360 - (16 x 2) = 328px of content. */
+  /* --- Mobile frame ------------------------------------------------------- */
   --container-frame: 22.5rem;
   --container-frame-content: 20.5rem;
 }
 
 /* ==========================================================================
-   Type styles — named after the Figma variable groups, NOT the Mozaic scale.
+   Type styles — one class per Figma text style.
 
-   The two systems label sizes inversely, which is why Figma's names win here:
+   Figma styles bundle size, line-height AND weight, so these classes do too.
+   Do not pair them with a separate font-* utility; the weight is already set.
 
-       Figma / ui-kit       Mozaic          px
-       body-md              text-sm         14
-       body-l / heading-sm  text-md         16
-
-   Adopting Mozaic's names would mean `md` meant 16 in code and 14 in the
-   design file. These classes set size and line-height only — combine with
-   font-medium / font-semibold for the weight half of a Figma style.
-
-   Only sizes actually present in the Figma frame are defined. When a new
-   section needs another, add it here under its real Figma name rather than
-   extrapolating the scale.
+   Size suffixes follow Figma: S = 10, M = 14, L = 16.
    ========================================================================== */
 
 @layer components {
-  /* Group/Mobile/Caption-md — 10/16. Micro labels only. */
-  .text-caption-md { font-size: 0.625rem; line-height: 1rem; }
+  /* Mobile/M-Label/S-semibold — 10/16 */
+  .m-label-s-semibold {
+    font-size: 0.625rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
 
-  /* Group/Mobile/Body-md — 14/20. The workhorse body size. */
-  .text-body-md { font-size: 0.875rem; line-height: 1.25rem; }
+  /* Mobile/M-Body/M-regular — 14/20 */
+  .m-body-m-regular {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
 
-  /* Group/Mobile/Heading-sm — 16/24. Section headings.
-     Figma style name: Mobile/M-Title/L-semibold. */
-  .text-heading-sm { font-size: 1rem; line-height: 1.5rem; }
+  /* Mobile/M-Title/M-medium — 14/20 */
+  .m-title-m-medium {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
 
-  /* Marketing/Mobile/Body-sm — 16/24. Same metrics as heading-sm but from
-     the marketing scale, where 16 is called `sm` rather than `l`. Kept
-     separate so the provenance of each usage stays readable.
-     Figma style name: Mobile/Body/S-semibold. */
-  .text-marketing-body-sm { font-size: 1rem; line-height: 1.5rem; }
+  /* Mobile/M-Title/M-semibold — 14/20 */
+  .m-title-m-semibold {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
 
-  /* Marketing/Mobile/Heading5-Semibold — 20/1.35, Lora. */
-  .marketing-heading-5 {
+  /* Mobile/M-Title/L-semibold — 16/24 */
+  .m-title-l-semibold {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* Mobile/Body/S-semibold — 16/24. The marketing scale, where S is 16. */
+  .body-s-semibold {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* Marketing/Mobile/Heading5-Semibold — 20/1.35, Lora */
+  .marketing-heading5-semibold {
     font-family: var(--font-marketing);
     font-size: 1.25rem;
     line-height: 1.35;
+    font-weight: 600;
     letter-spacing: 0;
   }
 }
@@ -268,14 +282,14 @@
 
 body {
   background-color: var(--color-base-white);
-  color: var(--color-text-primary);
+  color: var(--color-textcolor-grey-900-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 /* Design system focus ring on every focusable element. */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-brand-600);
+  outline: 2px solid var(--color-brand-blue-600);
   outline-offset: 2px;
   border-radius: var(--radius-md);
 }

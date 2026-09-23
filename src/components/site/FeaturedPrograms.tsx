@@ -73,9 +73,9 @@ export function FeaturedPrograms() {
             Figma draws its stroke inside the frame. */}
         <a
           href="#"
-          className="flex w-full items-center justify-center gap-sm rounded-md bg-bg-primary px-xl py-[10px] shadow-figma-xs inset-ring-1 inset-ring-blue-300"
+          className="flex w-full items-center justify-center gap-sm rounded-md bg-button-secondary-bg px-xl py-[10px] shadow-xs inset-ring-1 inset-ring-button-secondary-border"
         >
-          <span className="px-xxs text-marketing-body-sm font-semibold text-brand">
+          <span className="px-xxs text-marketing-body-sm font-semibold text-button-secondary-fg">
             See All
           </span>
         </a>

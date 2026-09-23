@@ -24,7 +24,7 @@ export function Header({
   walletBalance = "4529",
 }: HeaderProps) {
   return (
-    <header className="flex h-16 items-center justify-between bg-bg-primary px-xl py-md shadow-figma-elevation-1">
+    <header className="flex h-16 items-center justify-between bg-base-white px-xl py-md shadow-elevation-1">
       <div className="flex items-center gap-md">
         <button
           type="button"
@@ -54,7 +54,7 @@ export function Header({
           <IconWallet className="size-6 shrink-0" />
           <span
             aria-hidden
-            className="absolute -top-sm left-lg rounded-md border border-white bg-bg-brand px-[0.3125rem] py-px text-[0.625rem]/[0.875rem] font-semibold text-text-on-brand"
+            className="absolute -top-sm left-lg rounded-md border border-base-white bg-brand-600 px-[0.3125rem] py-px text-[0.625rem]/[0.875rem] font-semibold text-base-white"
           >
             {walletBalance}
           </span>

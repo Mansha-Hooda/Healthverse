@@ -57,19 +57,31 @@ Semantic tokens (prefer these):
 
 | Utility | Token | Value |
 |---|---|---|
-| `text-text-primary` | Gray-900 | `#252D38` |
-| `text-text-secondary` | Gray-700 | `#47566A` |
-| `text-text-on-brand` | White | `#FFFFFF` |
-| `text-brand` / `bg-bg-brand` | Blue-600 | `#0066DC` |
-| `bg-bg-primary` | White | `#FFFFFF` |
-| `bg-bg-secondary` | Gray-25 | `#F5F7F8` |
-| `bg-bg-brand-subtle` | Blue-25 | `#F1F7FF` |
-| `border-border-primary` | Gray-200 | `#BFC8D2` |
-| `text-error` / `text-success` / `text-warning` | Red-500 / Green-600 / Yellow-600 | |
+| `text-text-primary` | `Colors/text ✅/text-primary (900)` | `#252D38` |
+| `text-text-secondary`, `bg-text-secondary` | `Colors/text ✅/text-secondary (700)` | `#47566A` |
+| `bg-base-white`, `text-base-white`, `border-base-white` | `Colors/base/white` | `#FFFFFF` |
+| `bg-brand-600` | `Colors/brand/600` | `#0066DC` |
+| `text-brand-700` | `Colors/brand/700` | `#004FB6` |
+| `inset-ring-gray-light-mode-100` | `Colors/gray-light-mode/100` | `#DBE0E6` |
+| `bg-gray-light-mode-25` | `Colors/gray-light-mode/25` | `#F5F7F8` |
+| `from-cyan-900` / `to-cyan-700` | `Colors/cyan/*` | `#0C4753` / `#147589` |
+| `bg-{cyan,pink,purple}-100` / `-25` | `Colors/<hue>/*` | card themes |
 
-Full ramps are also available as `{bg,text,border}-<hue>-<step>` for
-**gray, blue, red, green, yellow, orange, cyan, purple, pink** at steps
-`25 · 50 · 100 · 200 · 300 · 400 · 500 · 600 · 700 · 800 · 900 · 950`.
+**Component tokens** — `component-colors/components/buttons ✅/secondary-color ✅`:
+
+| Utility | Figma variable | Value |
+|---|---|---|
+| `bg-button-secondary-bg` | `button-secondary-color-bg` | `#FFFFFF` |
+| `inset-ring-button-secondary-border` | `button-secondary-color-border` | `#72B3FF` |
+| `text-button-secondary-fg` | `button-secondary-color-fg` | `#0066DC` |
+
+Full ramps are available as `{bg,text,border,inset-ring}-<ramp>-<step>` for
+**gray-light-mode, brand, red, green, yellow, orange, cyan, purple, pink** at
+steps `25 · 50 · 100 · 200 · 300 · 400 · 500 · 600 · 700 · 800 · 900 · 950`,
+plus `base-white` and `base-black`.
+
+> Note the ramp names: Figma calls the neutral ramp **`gray-light-mode`** and
+> the blue ramp **`brand`**. There is no `gray-*` or `blue-*` utility here.
 
 ### Spacing — `p-*`, `m-*`, `gap-*`, etc.
 
@@ -93,16 +105,17 @@ Example: `px-xl` = 16px, `gap-md` = 8px, `pt-4xl` = 32px.
 
 ### Elevation — `shadow-*`
 
-| Utility | Use |
-|---|---|
-| `shadow-figma-elevation-1` | **Header and cards.** The value this design actually uses. |
-| `shadow-figma-xs` | Outlined buttons |
-| `drop-shadow-figma-xs` | The "Details" affordance (filter, not box-shadow) |
-| `shadow-elevation-1` … `shadow-elevation-4` | Mozaic's own scale — see the warning below |
+| Utility | Figma variable | Value |
+|---|---|---|
+| `shadow-elevation-1` | `shadow/elevation-1` | `0 1px 1px rgba(0,0,0,.02), 0 2px 4px rgba(0,0,0,.04)` |
+| `shadow-xs` | `uui-shadows/shadow-xs` | `0 1px 2px rgba(23,27,34,.05)` |
+| `drop-shadow-xs` | `Colors/Effects/Shadows 📌/shadow-xs` | `0 1px 1px rgba(23,27,34,.05)` |
 
-> ⚠️ **`shadow-elevation-1` and `shadow-figma-elevation-1` are different
-> shadows with confusingly similar names.** Mozaic's is heavier. This build
-> uses the **Figma** one everywhere. Reach for `shadow-figma-elevation-1`.
+> ⚠️ These are **Figma's** shadow values, not Mozaic's. Mozaic defines an
+> `elevation-1` too, but markedly heavier
+> (`0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.10)`). Mozaic's elevation
+> scale is deliberately **not** defined in this project, so the plain names
+> can't resolve to the wrong shadow.
 
 ### Type
 
@@ -190,7 +203,7 @@ Figma `1061:19797` · 360 × 64
 | `location` | `string` | `"Bangalore"` |
 | `walletBalance` | `string` | `"4529"` |
 
-Layout: `flex h-16 items-center justify-between px-xl py-md shadow-figma-elevation-1`.
+Layout: `flex h-16 items-center justify-between px-xl py-md shadow-elevation-1`.
 Left is back arrow + location pin + label; right is the wallet (with an
 overlapping balance badge) and a call link.
 
@@ -275,8 +288,8 @@ shifts the composition. Everything the user reads still uses tokens.
 
 **"Figma extensions" block in `globals.css`.** Values the Figma file
 specifies that Mozaic has no token for, kept in one reviewable list:
-`--radius-5xl` (32px), `--shadow-figma-elevation-1`, `--shadow-figma-xs`,
-`--drop-shadow-figma-xs`, plus `.text-caption-md` and `.marketing-heading-5`.
+`--radius-5xl` (32px), `--shadow-elevation-1`, `--shadow-xs`,
+`--drop-shadow-xs`, plus `.text-caption-md` and `.marketing-heading-5`.
 Add here — not inline — if another genuinely unavoidable value appears.
 
 **`next/image` lazy-loads.** Screenshots taken immediately after an edit can

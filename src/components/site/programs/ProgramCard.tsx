@@ -45,7 +45,7 @@ export function ProgramCard({
   // including its border. A CSS border would add 2px to the auto height; an
   // inset ring paints the same 1px line without affecting layout.
   return (
-    <article className="flex w-full flex-col items-center gap-md overflow-clip rounded-lg bg-bg-primary px-md pt-md pb-lg shadow-figma-elevation-1 inset-ring-1 inset-ring-gray-100">
+    <article className="flex w-full flex-col items-center gap-md overflow-clip rounded-lg bg-base-white px-md pt-md pb-lg shadow-elevation-1 inset-ring-1 inset-ring-gray-light-mode-100">
       <div
         className={`relative h-[106px] w-[312px] overflow-clip rounded-md border ${THEME_BORDER[theme]}`}
         style={{
@@ -178,7 +178,7 @@ export function ProgramCard({
           </p>
           <a
             href={href}
-            className="flex items-center justify-center gap-sm rounded-xs text-body-md font-semibold text-blue-700 drop-shadow-figma-xs"
+            className="flex items-center justify-center gap-sm rounded-xs text-body-md font-semibold text-brand-700 drop-shadow-xs"
           >
             Details
             <IconArrowRight className="size-4 shrink-0" />

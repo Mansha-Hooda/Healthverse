@@ -1,55 +1,61 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Mozaic — A Healthcare Design System (MediBuddy)
-   Every value here is lifted verbatim from the mb-design-system token
-   reference. Utilities resolve to these tokens so markup never carries a raw
-   hex, an off-scale spacing value, or an invented radius.
+   Design tokens — named after the Figma variable collections.
 
-   Mozaic is the authoritative token layer for Healthverse. The mb-uikit
-   `mb-*` scale and the mb-product-design `text-m-*` scale are deliberately
-   NOT mixed in — their accent ramps disagree with Mozaic's.
+   Values come from the MediBuddy Mozaic design system; the *names* follow the
+   Figma file so a token means the same thing in the design and in the code.
+   Where the two disagree on naming, Figma wins:
+
+       Figma                       Mozaic            here
+       Colors/base/white           white             base-white
+       Colors/gray-light-mode/100  gray-100          gray-light-mode-100
+       Colors/brand/700            blue-700          brand-700
+       shadow/elevation-1          elevation-1       elevation-1 (Figma value)
+
+   Only ramps and aliases the Figma file actually names are defined. Adding an
+   invented token reintroduces exactly the drift this file exists to prevent.
    ========================================================================== */
 
 @theme {
   /* --- Font ------------------------------------------------------------- */
   --font-sans: var(--font-lexend-deca), ui-sans-serif, system-ui, sans-serif;
-  /* Marketing headings only — see the Figma extensions note below. */
+  /* Marketing headings only — see the type styles below. */
   --font-marketing: var(--font-lora), Georgia, "Times New Roman", serif;
 
-  /* --- Base ------------------------------------------------------------- */
-  --color-white: #ffffff;
-  --color-black: #000000;
+  /* --- Colors/base ------------------------------------------------------- */
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
 
-  /* --- Gray -------------------------------------------------------------- */
-  --color-gray-25: #f5f7f8;
-  --color-gray-50: #ebeef1;
-  --color-gray-100: #dbe0e6;
-  --color-gray-200: #bfc8d2;
-  --color-gray-300: #a4b0c0;
-  --color-gray-400: #8a99ad;
-  --color-gray-500: #70829b;
-  --color-gray-600: #596c86;
-  --color-gray-700: #47566a;
-  --color-gray-800: #364251;
-  --color-gray-900: #252d38;
-  --color-gray-950: #171b22;
+  /* --- Colors/gray-light-mode -------------------------------------------- */
+  --color-gray-light-mode-25: #f5f7f8;
+  --color-gray-light-mode-50: #ebeef1;
+  --color-gray-light-mode-100: #dbe0e6;
+  --color-gray-light-mode-200: #bfc8d2;
+  --color-gray-light-mode-300: #a4b0c0;
+  --color-gray-light-mode-400: #8a99ad;
+  --color-gray-light-mode-500: #70829b;
+  --color-gray-light-mode-600: #596c86;
+  --color-gray-light-mode-700: #47566a;
+  --color-gray-light-mode-800: #364251;
+  --color-gray-light-mode-900: #252d38;
+  --color-gray-light-mode-950: #171b22;
 
-  /* --- Blue (brand primary) ---------------------------------------------- */
-  --color-blue-25: #f1f7ff;
-  --color-blue-50: #e2f0ff;
-  --color-blue-100: #c6e2ff;
-  --color-blue-200: #9acbff;
-  --color-blue-300: #72b3ff;
-  --color-blue-400: #4999ff;
-  --color-blue-500: #1f7df8;
-  --color-blue-600: #0066dc;
-  --color-blue-700: #004fb6;
-  --color-blue-800: #003c91;
-  --color-blue-900: #00296a;
-  --color-blue-950: #001846;
+  /* --- Colors/brand (Figma also spells this brand-blue) ------------------- */
+  --color-brand-25: #f1f7ff;
+  --color-brand-50: #e2f0ff;
+  --color-brand-100: #c6e2ff;
+  --color-brand-200: #9acbff;
+  --color-brand-300: #72b3ff;
+  --color-brand-400: #4999ff;
+  --color-brand-500: #1f7df8;
+  --color-brand-600: #0066dc;
+  --color-brand-700: #004fb6;
+  --color-brand-800: #003c91;
+  --color-brand-900: #00296a;
+  --color-brand-950: #001846;
 
-  /* --- Red (error / brand secondary) -------------------------------------- */
+  /* --- Colors/red --------------------------------------------------------- */
   --color-red-25: #fff4f5;
   --color-red-50: #fee9ea;
   --color-red-100: #fdd6d7;
@@ -63,7 +69,7 @@
   --color-red-900: #620004;
   --color-red-950: #400002;
 
-  /* --- Green (success) ----------------------------------------------------- */
+  /* --- Colors/green ------------------------------------------------------- */
   --color-green-25: #f8fbfa;
   --color-green-50: #f1f8f5;
   --color-green-100: #e0f8e8;
@@ -77,7 +83,7 @@
   --color-green-900: #094b2c;
   --color-green-950: #07341f;
 
-  /* --- Yellow (warning) ---------------------------------------------------- */
+  /* --- Colors/yellow ------------------------------------------------------ */
   --color-yellow-25: #fffbe7;
   --color-yellow-50: #fff7ce;
   --color-yellow-100: #feef9d;
@@ -91,7 +97,7 @@
   --color-yellow-900: #63350c;
   --color-yellow-950: #46240b;
 
-  /* --- Orange (warning alt) ------------------------------------------------ */
+  /* --- Colors/orange ------------------------------------------------------ */
   --color-orange-25: #fffaf6;
   --color-orange-50: #fff5ed;
   --color-orange-100: #feebda;
@@ -105,7 +111,7 @@
   --color-orange-900: #693200;
   --color-orange-950: #492300;
 
-  /* --- Cyan ---------------------------------------------------------------- */
+  /* --- Colors/cyan -------------------------------------------------------- */
   --color-cyan-25: #f4fdfe;
   --color-cyan-50: #e9fafd;
   --color-cyan-100: #d2f5fc;
@@ -119,7 +125,7 @@
   --color-cyan-900: #0c4753;
   --color-cyan-950: #08313a;
 
-  /* --- Purple -------------------------------------------------------------- */
+  /* --- Colors/purple ------------------------------------------------------ */
   --color-purple-25: #fafaff;
   --color-purple-50: #f1edfe;
   --color-purple-100: #e4dafd;
@@ -133,7 +139,7 @@
   --color-purple-900: #33225c;
   --color-purple-950: #1e1538;
 
-  /* --- Pink ---------------------------------------------------------------- */
+  /* --- Colors/pink -------------------------------------------------------- */
   --color-pink-25: #fef6fb;
   --color-pink-50: #fde9f7;
   --color-pink-100: #fbd4ef;
@@ -147,40 +153,17 @@
   --color-pink-900: #4f173e;
   --color-pink-950: #300e26;
 
-  /* --- Semantic aliases ----------------------------------------------------
-     Components reference these, not the raw scales above. */
-  --color-brand: var(--color-blue-600);
-  --color-brand-hover: var(--color-blue-700);
-  --color-brand-active: var(--color-blue-800);
-  --color-error: var(--color-red-500);
-  --color-error-hover: var(--color-red-600);
-  --color-success: var(--color-green-600);
-  --color-warning: var(--color-yellow-600);
+  /* --- Colors/text ✅ ------------------------------------------------------ */
+  --color-text-primary: #252d38;
+  --color-text-secondary: #47566a;
 
-  --color-text-primary: var(--color-gray-900);
-  --color-text-secondary: var(--color-gray-700);
-  --color-text-placeholder: var(--color-gray-400);
-  --color-text-disabled: var(--color-gray-300);
-  --color-text-on-brand: var(--color-white);
-  --color-text-error: var(--color-red-600);
+  /* --- component-colors/components/buttons ✅/secondary-color ✅ ------------ */
+  --color-button-secondary-bg: #ffffff;
+  --color-button-secondary-border: #72b3ff;
+  --color-button-secondary-fg: #0066dc;
 
-  --color-bg-primary: var(--color-white);
-  --color-bg-secondary: var(--color-gray-25);
-  --color-bg-tertiary: var(--color-gray-50);
-  --color-bg-brand: var(--color-blue-600);
-  --color-bg-brand-subtle: var(--color-blue-25);
-  --color-bg-error: var(--color-red-25);
-  --color-bg-error-subtle: var(--color-red-50);
-  --color-bg-success: var(--color-green-25);
-  --color-bg-warning: var(--color-yellow-25);
-
-  --color-border-primary: var(--color-gray-200);
-  --color-border-secondary: var(--color-gray-300);
-  --color-border-brand: var(--color-blue-600);
-  --color-border-error: var(--color-red-500);
-  --color-border-disabled: var(--color-gray-200);
-
-  /* --- Spacing scale -------------------------------------------------------- */
+  /* --- Spacing scale -------------------------------------------------------
+     Figma and Mozaic agree on these names exactly. */
   --spacing-none: 0rem;
   --spacing-xxs: 0.125rem;
   --spacing-xs: 0.25rem;
@@ -199,7 +182,8 @@
   --spacing-10xl: 8rem;
   --spacing-11xl: 10rem;
 
-  /* --- Border radius --------------------------------------------------------- */
+  /* --- Border radius -------------------------------------------------------
+     Also identical in both systems, except 5xl. */
   --radius-none: 0rem;
   --radius-xxs: 0.125rem;
   --radius-xs: 0.25rem;
@@ -211,46 +195,27 @@
   --radius-3xl: 1.25rem;
   --radius-4xl: 1.5rem;
   --radius-full: 9999px;
-
-  /* --- Elevation -------------------------------------------------------------- */
-  --shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-elevation-2: 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.1);
-  --shadow-elevation-3: 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.12);
-  --shadow-elevation-4: 0 8px 16px rgba(0, 0, 0, 0.08), 0 20px 48px rgba(0, 0, 0, 0.16);
-  --shadow-elevation-1-up: 0 -1px 2px rgba(0, 0, 0, 0.06), 0 -1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-elevation-2-up: 0 -2px 4px rgba(0, 0, 0, 0.06), 0 -4px 8px rgba(0, 0, 0, 0.1);
-  --shadow-elevation-3-up: 0 -4px 8px rgba(0, 0, 0, 0.06), 0 -8px 24px rgba(0, 0, 0, 0.12);
-  --shadow-elevation-4-up: 0 -8px 16px rgba(0, 0, 0, 0.08), 0 -20px 48px rgba(0, 0, 0, 0.16);
-
-  /* --- Mobile frame ----------------------------------------------------------
-     Locked to a fixed 360px mobile frame for now; breakpoints come later.
-     Mozaic's mobile grid is 360 - (16 x 2) = 328px of content. */
-  --container-frame: 22.5rem;
-  --container-frame-content: 20.5rem;
-
-  /* ==========================================================================
-     Figma extensions — NOT part of Mozaic.
-     Values the Figma file specifies that the Mozaic reference has no token
-     for. Each one is a deliberate, confirmed decision rather than an
-     approximation. Keep this list short and review it when Mozaic updates.
-     ========================================================================== */
-
-  /* 32px marketing banner corner. Mozaic's radius scale stops at 4xl (24px)
-     before jumping to full. Figma node 1050:6680. */
+  /* 32px marketing banner corner. Neither Mozaic nor the Figma radius
+     collection names this; taken from the hero frame (1050:6680). */
   --radius-5xl: 2rem;
 
-  /* Figma ships its own shadow scale whose names collide with Mozaic's but
-     whose values differ — Figma's are markedly lighter. Confirmed that the
-     Figma values govern this build, so they are namespaced to keep the two
-     scales distinguishable at every call site.
-       Mozaic  elevation-1: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.10)
-       Figma   elevation-1: as below */
-  --shadow-figma-elevation-1:
+  /* --- Elevation -----------------------------------------------------------
+     Figma's own shadow scale. Note these are NOT Mozaic's elevation values —
+     Mozaic's elevation-1 is markedly heavier. Figma governs this build, so
+     its values carry the plain names. */
+  /* shadow/elevation-1 */
+  --shadow-elevation-1:
     0 1px 1px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-figma-xs: 0 1px 2px rgba(23, 27, 34, 0.05);
-  /* Same colour as above but applied as a filter rather than a box-shadow,
-     which is how the Figma "Details" affordance specifies it. */
-  --drop-shadow-figma-xs: 0 1px 1px rgba(23, 27, 34, 0.05);
+  /* uui-shadows/shadow-xs */
+  --shadow-xs: 0 1px 2px rgba(23, 27, 34, 0.05);
+  /* Colors/Effects/Shadows 📌/shadow-xs, applied as a filter */
+  --drop-shadow-xs: 0 1px 1px rgba(23, 27, 34, 0.05);
+
+  /* --- Mobile frame --------------------------------------------------------
+     Locked to a fixed 360px mobile frame for now; breakpoints come later.
+     The mobile grid is 360 - (16 x 2) = 328px of content. */
+  --container-frame: 22.5rem;
+  --container-frame-content: 20.5rem;
 }
 
 /* ==========================================================================
@@ -258,9 +223,9 @@
 
    The two systems label sizes inversely, which is why Figma's names win here:
 
-       Figma / ui-kit      Mozaic          px
-       body-md             text-sm         14
-       body-l  / heading-sm text-md        16
+       Figma / ui-kit       Mozaic          px
+       body-md              text-sm         14
+       body-l / heading-sm  text-md         16
 
    Adopting Mozaic's names would mean `md` meant 16 in code and 14 in the
    design file. These classes set size and line-height only — combine with
@@ -302,7 +267,7 @@
    ========================================================================== */
 
 body {
-  background-color: var(--color-bg-primary);
+  background-color: var(--color-base-white);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -310,7 +275,7 @@ body {
 
 /* Design system focus ring on every focusable element. */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: 2px solid var(--color-brand-600);
   outline-offset: 2px;
   border-radius: var(--radius-md);
 }

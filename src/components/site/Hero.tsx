@@ -19,7 +19,7 @@ export function Hero({
           in sRGB; Tailwind v4 would otherwise default to oklab and shift the
           midtones even though both stops are identical. */}
       <div className="flex items-center justify-center rounded-tl-md rounded-tr-5xl rounded-br-md rounded-bl-5xl bg-linear-45/srgb from-cyan-900 to-cyan-700 px-xl py-3xl">
-        <h1 className="marketing-heading-5 flex-1 font-semibold text-white">
+        <h1 className="marketing-heading-5 flex-1 font-semibold text-base-white">
           {heading}
         </h1>
       </div>

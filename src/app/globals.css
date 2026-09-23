@@ -238,6 +238,19 @@
   /* 32px marketing banner corner. Mozaic's radius scale stops at 4xl (24px)
      before jumping to full. Figma node 1050:6680. */
   --radius-5xl: 2rem;
+
+  /* Figma ships its own shadow scale whose names collide with Mozaic's but
+     whose values differ — Figma's are markedly lighter. Confirmed that the
+     Figma values govern this build, so they are namespaced to keep the two
+     scales distinguishable at every call site.
+       Mozaic  elevation-1: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.10)
+       Figma   elevation-1: as below */
+  --shadow-figma-elevation-1:
+    0 1px 1px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-figma-xs: 0 1px 2px rgba(23, 27, 34, 0.05);
+  /* Same colour as above but applied as a filter rather than a box-shadow,
+     which is how the Figma "Details" affordance specifies it. */
+  --drop-shadow-figma-xs: 0 1px 1px rgba(23, 27, 34, 0.05);
 }
 
 /* ==========================================================================
@@ -259,6 +272,11 @@
   .text-style-md { font-size: 1rem; line-height: 1.5rem; }
   .text-style-sm { font-size: 0.875rem; line-height: 1.25rem; }
   .text-style-xs { font-size: 0.75rem; line-height: 1.125rem; }
+
+  /* Figma `Group/Mobile/Caption-md-Semibold` — 10px/16px. Below Mozaic's
+     12px floor, so it has no Mozaic equivalent. Label use only, never
+     running text. */
+  .text-caption-md { font-size: 0.625rem; line-height: 1rem; }
 
   /* Marketing type — Figma's `Marketing/Mobile/Heading5-Semibold`. Sits
      outside the Mozaic scale and pairs with --font-marketing (Lora). */

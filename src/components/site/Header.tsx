@@ -24,7 +24,7 @@ export function Header({
   walletBalance = "4529",
 }: HeaderProps) {
   return (
-    <header className="flex h-16 items-center justify-between bg-bg-primary px-xl py-md shadow-elevation-1">
+    <header className="flex h-16 items-center justify-between bg-bg-primary px-xl py-md shadow-figma-elevation-1">
       <div className="flex items-center gap-md">
         <button
           type="button"

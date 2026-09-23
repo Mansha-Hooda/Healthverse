@@ -3,15 +3,19 @@
 /* ==========================================================================
    Design tokens — named after the Figma component annotations.
 
-   Names follow the style / colour names a designer picks in Figma and that
-   appear in the handoff table, not the underlying variable groups:
+   Each token carries its exact Figma name in a comment. The code name is a
+   mechanical transliteration of it, because the literal string cannot be a
+   CSS class:
 
-       Figma annotation                  token here
-       Mobile/M-Title/M-semibold         .m-title-m-semibold
-       textcolor/Grey 900 - Primary      --color-textcolor-grey-900-primary
-       brand-blue/700                    --color-brand-blue-700
-       gray-light-mode/100               --color-gray-light-mode-100
-       shadow/elevation-1                --shadow-elevation-1
+       `/`      Tailwind reserves this for the opacity modifier (bg-red-500/50)
+       spaces   HTML would split `Grey 900 - Primary` into separate classes
+       capitals Tailwind matches lowercase theme keys
+
+   So: lowercase, and `/`, spaces and ` - ` all collapse to `-`.
+
+       textcolor/Grey 900 - Primary  ->  --color-textcolor-grey-900-primary
+       brand-blue/700                ->  --color-brand-blue-700
+       shadow/elevation-1            ->  --shadow-elevation-1
 
    Values come from the MediBuddy Mozaic design system; only the naming is
    Figma's. Adding a token Figma does not name reintroduces the drift this
@@ -20,19 +24,22 @@
 
 @theme {
   /* --- Font ------------------------------------------------------------- */
+  /* Figma: Font Family/Font Family Body */
   --font-sans: var(--font-lexend-deca), ui-sans-serif, system-ui, sans-serif;
-  /* Marketing headings only — see the type styles below. */
+  /* Lora. Marketing headings only — see the type styles below. */
   --font-marketing: var(--font-lora), Georgia, "Times New Roman", serif;
 
-  /* --- base ------------------------------------------------------------- */
+  /* --- Figma: base/<name> ------------------------------------------------ */
   --color-base-white: #ffffff;
   --color-base-black: #000000;
 
-  /* --- textcolor -------------------------------------------------------- */
+  /* --- Figma: textcolor/Grey <step> - <role> ----------------------------- */
+  /* textcolor/Grey 900 - Primary */
   --color-textcolor-grey-900-primary: #252d38;
+  /* textcolor/Grey 700 - Secondary */
   --color-textcolor-grey-700-secondary: #47566a;
 
-  /* --- gray-light-mode -------------------------------------------------- */
+  /* --- Figma: gray-light-mode/<step> ------------------------------------- */
   --color-gray-light-mode-25: #f5f7f8;
   --color-gray-light-mode-50: #ebeef1;
   --color-gray-light-mode-100: #dbe0e6;
@@ -46,7 +53,7 @@
   --color-gray-light-mode-900: #252d38;
   --color-gray-light-mode-950: #171b22;
 
-  /* --- brand-blue -------------------------------------------------------- */
+  /* --- Figma: brand-blue/<step> ------------------------------------------ */
   --color-brand-blue-25: #f1f7ff;
   --color-brand-blue-50: #e2f0ff;
   --color-brand-blue-100: #c6e2ff;
@@ -60,10 +67,9 @@
   --color-brand-blue-900: #00296a;
   --color-brand-blue-950: #001846;
 
-  /* --- tertiary-color-palettes ------------------------------------------
-     Figma spells these both as `Colors/<hue>/<step>` and
-     `tertiary-color-palettes/<Hue> Palette/<step>`. The short form is used
-     here; the values are identical either way. */
+  /* --- Figma: Colors/cyan/<step>, also spelled
+         tertiary-color-palettes/Cyan Palette/<step>. Identical values; the
+         short form is used here. --------------------------------------------- */
   --color-cyan-25: #f4fdfe;
   --color-cyan-50: #e9fafd;
   --color-cyan-100: #d2f5fc;
@@ -77,6 +83,7 @@
   --color-cyan-900: #0c4753;
   --color-cyan-950: #08313a;
 
+  /* --- Figma: Colors/purple/<step> --------------------------------------- */
   --color-purple-25: #fafaff;
   --color-purple-50: #f1edfe;
   --color-purple-100: #e4dafd;
@@ -90,6 +97,7 @@
   --color-purple-900: #33225c;
   --color-purple-950: #1e1538;
 
+  /* --- Figma: Colors/pink/<step> ----------------------------------------- */
   --color-pink-25: #fef6fb;
   --color-pink-50: #fde9f7;
   --color-pink-100: #fbd4ef;
@@ -103,6 +111,7 @@
   --color-pink-900: #4f173e;
   --color-pink-950: #300e26;
 
+  /* --- Figma: Colors/red/<step> ------------------------------------------ */
   --color-red-25: #fff4f5;
   --color-red-50: #fee9ea;
   --color-red-100: #fdd6d7;
@@ -116,6 +125,7 @@
   --color-red-900: #620004;
   --color-red-950: #400002;
 
+  /* --- Figma: Colors/green/<step> ---------------------------------------- */
   --color-green-25: #f8fbfa;
   --color-green-50: #f1f8f5;
   --color-green-100: #e0f8e8;
@@ -129,6 +139,7 @@
   --color-green-900: #094b2c;
   --color-green-950: #07341f;
 
+  /* --- Figma: Colors/yellow/<step> --------------------------------------- */
   --color-yellow-25: #fffbe7;
   --color-yellow-50: #fff7ce;
   --color-yellow-100: #feef9d;
@@ -142,6 +153,7 @@
   --color-yellow-900: #63350c;
   --color-yellow-950: #46240b;
 
+  /* --- Figma: Colors/orange/<step> --------------------------------------- */
   --color-orange-25: #fffaf6;
   --color-orange-50: #fff5ed;
   --color-orange-100: #feebda;
@@ -155,12 +167,15 @@
   --color-orange-900: #693200;
   --color-orange-950: #492300;
 
-  /* --- component-colors/components/buttons/secondary-color --------------- */
+  /* --- Figma: component-colors/components/buttons ✅/secondary-color ✅/ --- */
+  /* button-secondary-color-bg */
   --color-button-secondary-bg: #ffffff;
+  /* button-secondary-color-border */
   --color-button-secondary-border: #72b3ff;
+  /* button-secondary-color-fg */
   --color-button-secondary-fg: #0066dc;
 
-  /* --- Spacing ----------------------------------------------------------- */
+  /* --- Figma: spacing-<step>. Names match the design file exactly. ------- */
   --spacing-none: 0rem;
   --spacing-xxs: 0.125rem;
   --spacing-xs: 0.25rem;
@@ -179,7 +194,7 @@
   --spacing-10xl: 8rem;
   --spacing-11xl: 10rem;
 
-  /* --- Border radius ----------------------------------------------------- */
+  /* --- Figma: radius-<step>. Names match the design file exactly. -------- */
   --radius-none: 0rem;
   --radius-xxs: 0.125rem;
   --radius-xs: 0.25rem;
@@ -191,19 +206,21 @@
   --radius-3xl: 1.25rem;
   --radius-4xl: 1.5rem;
   --radius-full: 9999px;
-  /* 32px marketing banner corner — hero frame 1050:6680, unnamed in Figma. */
+  /* Not named in Figma — 32px marketing banner corner, hero frame 1050:6680. */
   --radius-5xl: 2rem;
 
   /* --- Elevation ---------------------------------------------------------- */
-  /* shadow/elevation-1 */
+  /* Figma: shadow/elevation-1 */
   --shadow-elevation-1:
     0 1px 1px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.04);
-  /* uui-shadows/shadow-xs */
+  /* Figma: uui-shadows/shadow-xs */
   --shadow-xs: 0 1px 2px rgba(23, 27, 34, 0.05);
-  /* Colors/Effects/Shadows/shadow-xs, applied as a filter */
+  /* Figma: Colors/Effects/Shadows 📌/shadow-xs, applied as a filter */
   --drop-shadow-xs: 0 1px 1px rgba(23, 27, 34, 0.05);
 
-  /* --- Mobile frame ------------------------------------------------------- */
+  /* --- Mobile frame -------------------------------------------------------
+     Not a Figma token — the 360px artboard width, held as a variable so the
+     frame is set in one place. */
   --container-frame: 22.5rem;
   --container-frame-content: 20.5rem;
 }
@@ -214,11 +231,12 @@
    Figma styles bundle size, line-height AND weight, so these classes do too.
    Do not pair them with a separate font-* utility; the weight is already set.
 
-   Size suffixes follow Figma: S = 10, M = 14, L = 16.
+   Size suffixes follow Figma: S = 10, M = 14, L = 16 — except in the
+   marketing scale, where S = 16.
    ========================================================================== */
 
 @layer components {
-  /* Mobile/M-Label/S-semibold — 10/16 */
+  /* Figma: Mobile/M-Label/S-semibold — 10/16 */
   .m-label-s-semibold {
     font-size: 0.625rem;
     line-height: 1rem;
@@ -226,7 +244,7 @@
     letter-spacing: 0;
   }
 
-  /* Mobile/M-Body/M-regular — 14/20 */
+  /* Figma: Mobile/M-Body/M-regular — 14/20 */
   .m-body-m-regular {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -234,7 +252,7 @@
     letter-spacing: 0;
   }
 
-  /* Mobile/M-Title/M-medium — 14/20 */
+  /* Figma: Mobile/M-Title/M-medium — 14/20 */
   .m-title-m-medium {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -242,7 +260,7 @@
     letter-spacing: 0;
   }
 
-  /* Mobile/M-Title/M-semibold — 14/20 */
+  /* Figma: Mobile/M-Title/M-semibold — 14/20 */
   .m-title-m-semibold {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -250,7 +268,7 @@
     letter-spacing: 0;
   }
 
-  /* Mobile/M-Title/L-semibold — 16/24 */
+  /* Figma: Mobile/M-Title/L-semibold — 16/24 */
   .m-title-l-semibold {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -258,7 +276,7 @@
     letter-spacing: 0;
   }
 
-  /* Mobile/Body/S-semibold — 16/24. The marketing scale, where S is 16. */
+  /* Figma: Mobile/Body/S-semibold — 16/24. Marketing scale, where S is 16. */
   .body-s-semibold {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -266,7 +284,7 @@
     letter-spacing: 0;
   }
 
-  /* Marketing/Mobile/Heading5-Semibold — 20/1.35, Lora */
+  /* Figma: Marketing/Mobile/Heading5-Semibold — 20/1.35, Lora */
   .marketing-heading5-semibold {
     font-family: var(--font-marketing);
     font-size: 1.25rem;

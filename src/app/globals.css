@@ -39,6 +39,12 @@
   /* textcolor/Grey 700 - Secondary */
   --color-textcolor-grey-700-secondary: #47566a;
 
+  /* --- Figma: gray-cool/<step> -------------------------------------------
+     A separate Figma collection that happens to share gray-light-mode/50's
+     value. Kept under its own name because the brand tiles (1050:6778)
+     reference gray-cool/50 specifically. */
+  --color-gray-cool-50: #ebeef1;
+
   /* --- Figma: gray-light-mode/<step> ------------------------------------- */
   --color-gray-light-mode-25: #f5f7f8;
   --color-gray-light-mode-50: #ebeef1;

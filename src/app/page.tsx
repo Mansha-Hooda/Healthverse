@@ -1,3 +1,4 @@
+import { BrowseByBrands } from "@/components/site/BrowseByBrands";
 import { FeaturedPrograms } from "@/components/site/FeaturedPrograms";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
@@ -9,6 +10,7 @@ export default function Home() {
       <main>
         <Hero />
         <FeaturedPrograms />
+        <BrowseByBrands />
         {/* Sections get added here one at a time, in Figma order.
             Nothing is designed until the Figma frame specifies it. */}
       </main>

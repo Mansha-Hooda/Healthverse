@@ -1,52 +1,35 @@
 import {
-  ART_CULT,
-  ART_FITPASS,
-} from "@/components/site/programs/constants";
-import {
   ProgramCard,
   type ProgramCardProps,
 } from "@/components/site/programs/ProgramCard";
 
-const CULT_LOGO = {
-  src: "/programs/cultfit-logo.png",
-  width: 66.722,
-  height: 25.121,
-  alt: "cult.fit",
-};
-
 const PROGRAMS: ProgramCardProps[] = [
   {
-    theme: "cyan",
-    partner: { logo: CULT_LOGO, tier: "Pro" },
+    banner: {
+      src: "/programs/banner-cult-pro.webp",
+      alt: "By partner cult.fit Pro",
+    },
     name: "Cult Pro + OnePass",
     duration: "12 months",
     price: "₹9,297 (including taxes)",
-    art: ART_CULT,
-    partnerOffset: 0.44,
   },
   {
-    theme: "pink",
-    partner: {
-      logo: {
-        src: "/programs/fitpass-logo.png",
-        width: 102.292,
-        height: 16,
-        alt: "FITPASS",
-      },
+    banner: {
+      src: "/programs/banner-fitpass.webp",
+      alt: "By partner FITPASS",
     },
     name: "FITPASS",
     duration: "12 months",
     price: "₹10,724 (including taxes)",
-    art: ART_FITPASS,
   },
   {
-    theme: "purple",
-    partner: { logo: CULT_LOGO, tier: "Elite" },
+    banner: {
+      src: "/programs/banner-cult-elite.webp",
+      alt: "By partner cult.fit Elite",
+    },
     name: "Cult Elite",
     duration: "12 months",
     price: "₹15,225 (including taxes)",
-    art: ART_CULT,
-    partnerOffset: 0.44,
   },
 ];
 
@@ -75,7 +58,7 @@ export function FeaturedPrograms() {
           href="#"
           className="flex w-full items-center justify-center gap-sm rounded-md bg-button-secondary-bg px-xl py-[10px] shadow-xs inset-ring-1 inset-ring-button-secondary-border"
         >
-          <span className="px-xxs body-s-semibold text-button-secondary-fg">
+          <span className="body-s-semibold px-xxs text-button-secondary-fg">
             See All
           </span>
         </a>

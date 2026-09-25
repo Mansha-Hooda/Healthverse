@@ -10,6 +10,9 @@ type HeaderProps = {
   location?: string;
   /** Wallet balance shown in the badge over the wallet icon. */
   walletBalance?: string;
+  /** When given, the location becomes a button that reopens the city sheet.
+      Without it the location stays static text, as the Figma frame shows. */
+  onSelectLocation?: () => void;
 };
 
 /**
@@ -22,7 +25,18 @@ type HeaderProps = {
 export function Header({
   location = "Bangalore",
   walletBalance = "4529",
+  onSelectLocation,
 }: HeaderProps) {
+  /* Same content either way, so the two branches stay visually identical. */
+  const locationContent = (
+    <>
+      <IconLocation06 className="size-4 shrink-0 text-textcolor-grey-900-primary" />
+      <span className="m-title-m-semibold text-textcolor-grey-900-primary">
+        {location}
+      </span>
+    </>
+  );
+
   return (
     <header className="flex h-16 items-center justify-between bg-base-white px-xl py-md shadow-elevation-1">
       <div className="flex items-center gap-md">
@@ -34,12 +48,18 @@ export function Header({
           <IconArrowLeft02 className="size-6" />
         </button>
 
-        <p className="flex items-center gap-xs">
-          <IconLocation06 className="size-4 shrink-0 text-textcolor-grey-900-primary" />
-          <span className="m-title-m-semibold text-textcolor-grey-900-primary">
-            {location}
-          </span>
-        </p>
+        {onSelectLocation ? (
+          <button
+            type="button"
+            onClick={onSelectLocation}
+            aria-label={`Change city, currently ${location}`}
+            className="flex items-center gap-xs"
+          >
+            {locationContent}
+          </button>
+        ) : (
+          <p className="flex items-center gap-xs">{locationContent}</p>
+        )}
       </div>
 
       <div className="flex items-center gap-xl">

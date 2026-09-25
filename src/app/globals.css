@@ -40,11 +40,17 @@
   --color-textcolor-grey-700-secondary: #47566a;
   /* textcolor/Grey 500 - Disabled */
   --color-textcolor-grey-500-disabled: #70829b;
+  /* textcolor/Blue 600 — the city sheet's search glyph. Shares its value
+     with brand-blue/600, but Figma names it separately, so it is kept
+     separate here too. */
+  --color-textcolor-blue-600: #0066dc;
 
-  /* --- Figma: colors/border/<name> --------------------------------------- */
-  /* border-secondary — the FAQ item divider (1050:6950). Distinct from
-     gray-light-mode/100, which is 5 steps darker. */
-  --color-border-secondary: #e4e7ec;
+  /* --- Figma: colors/border ✅/<name> -------------------------------------
+     Two collections define border-secondary: the ✅ one used by the city
+     sheet (1050:8751) gives #BFC8D2, while an older `colors/border` gives
+     #E4E7EC. The ✅ collection wins, as with the greys, so the FAQ dividers
+     share this value. */
+  --color-border-secondary: #bfc8d2;
 
   /* --- Figma: creatives-banners/Cyan/<role> ------------------------------
      The creative banner palette. Same values as Colors/cyan 50 and 500, but
@@ -235,6 +241,11 @@
   /* Figma: shadow/elevation-1 */
   --shadow-elevation-1:
     0 1px 1px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.04);
+  /* Figma: Shadow/Elevation 2 — the city sheet's search bar */
+  --shadow-elevation-2:
+    0 4px 10px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.04);
+  /* Figma: Drop shadow/Normal — the bottom card */
+  --shadow-drop-normal: 0 2px 8px rgba(0, 0, 0, 0.04);
   /* Figma: uui-shadows/shadow-xs */
   --shadow-xs: 0 1px 2px rgba(23, 27, 34, 0.05);
   /* Figma: Colors/Effects/Shadows 📌/shadow-xs, applied as a filter */

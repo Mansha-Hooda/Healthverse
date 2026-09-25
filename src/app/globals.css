@@ -38,6 +38,17 @@
   --color-textcolor-grey-900-primary: #252d38;
   /* textcolor/Grey 700 - Secondary */
   --color-textcolor-grey-700-secondary: #47566a;
+  /* textcolor/Grey 500 - Disabled */
+  --color-textcolor-grey-500-disabled: #70829b;
+
+  /* --- Figma: creatives-banners/Cyan/<role> ------------------------------
+     The creative banner palette. Same values as Colors/cyan 50 and 500, but
+     the step cards (1050:6818) reference these names, so they are kept
+     distinct rather than aliased to the ramp. */
+  /* creatives-banners/Cyan/Surface */
+  --color-creatives-banners-cyan-surface: #e9fafd;
+  /* creatives-banners/Cyan/Tag */
+  --color-creatives-banners-cyan-tag: #1ca6c1;
 
   /* --- Figma: gray-cool/<step> -------------------------------------------
      A separate Figma collection that happens to share gray-light-mode/50's
@@ -247,6 +258,23 @@
     font-size: 0.625rem;
     line-height: 1rem;
     font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* Figma: Mobile/M-Label/S-medium — 10/16 */
+  .m-label-s-medium {
+    font-size: 0.625rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  /* Figma: Mobile/M-Body/S-regular — 12/20. Note S is 12 in the M-Body
+     scale but 10 in M-Label; the full style path disambiguates. */
+  .m-body-s-regular {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 400;
     letter-spacing: 0;
   }
 

@@ -333,6 +333,28 @@
     letter-spacing: 0;
   }
 
+  /* Footer heading and copy — 18/28, Lora.
+     These have no Figma style name (the handoff table lists Text Name as NA);
+     the designer applied Lora directly over the Group/Mobile/Display-xs
+     metrics, which is where the letter-spacing reference in the export comes
+     from. Named by agreement rather than copied, so treat the name as ours,
+     not Figma's. */
+  .marketing-display-xs-semibold {
+    font-family: var(--font-marketing);
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .marketing-display-xs-regular {
+    font-family: var(--font-marketing);
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
   /* Figma: Marketing/Mobile/Heading5-Semibold — 20/1.35, Lora */
   .marketing-heading5-semibold {
     font-family: var(--font-marketing);

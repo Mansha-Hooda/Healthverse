@@ -41,6 +41,11 @@
   /* textcolor/Grey 500 - Disabled */
   --color-textcolor-grey-500-disabled: #70829b;
 
+  /* --- Figma: colors/border/<name> --------------------------------------- */
+  /* border-secondary — the FAQ item divider (1050:6950). Distinct from
+     gray-light-mode/100, which is 5 steps darker. */
+  --color-border-secondary: #e4e7ec;
+
   /* --- Figma: creatives-banners/Cyan/<role> ------------------------------
      The creative banner palette. Same values as Colors/cyan 50 and 500, but
      the step cards (1050:6818) reference these names, so they are kept
@@ -283,6 +288,16 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  /* Figma: Mobile/M-Title/S-semibold — 12/20. Note the handoff table labels
+     this "S-medium", but both its own typography panel and the design file
+     specify SemiBold, so the name in the table is a typo. */
+  .m-title-s-semibold {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 600;
     letter-spacing: 0;
   }
 

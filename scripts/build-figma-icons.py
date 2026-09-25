@@ -32,7 +32,7 @@ OUT_DIR = os.path.join(ROOT, "src", "components", "icons")
 # file carries #2E3742 in a legacy collection, and the handoff annotation
 # specifies #252D38. Emitting currentColor lets each call site supply the
 # token instead.
-INHERIT = ("#252D38", "#2E3742", "#1CA6C1")
+INHERIT = ("#252D38", "#2E3742", "#1CA6C1", "#0066DC")
 
 BOX = 24.0  # every header icon box, in px
 
@@ -131,6 +131,12 @@ GROUPS = {
         "featured programs node 1050:6683",
         [
             ("IconArrowRight01", simple, "arrow-right-01.svg"),
+        ],
+    ),
+    "faq.tsx": (
+        "faq node 1050:6950",
+        [
+            ("IconChevronDown", simple, "chevron-down.svg"),
         ],
     ),
     "how-it-works.tsx": (

@@ -4,10 +4,7 @@ import {
   IconInvoice01,
   IconSearch01,
 } from "@/components/icons/how-it-works";
-import {
-  SPECK,
-  STEP_SPECKS,
-} from "@/components/site/how-it-works/constants";
+import { STEP_PATTERN } from "@/components/site/how-it-works/constants";
 
 type Step = {
   label: string;
@@ -64,29 +61,18 @@ export function HowItWorks() {
                description onto an extra line. */
             className="relative flex w-[102px] shrink-0 flex-col gap-xl overflow-clip rounded-md px-md py-lg inset-ring-1 inset-ring-creatives-banners-cyan-surface"
           >
-            {STEP_SPECKS.map((speck, index) => (
-              <span
-                key={index}
-                aria-hidden
-                className="absolute flex items-center justify-center"
-                style={{
-                  left: `${speck.left}px`,
-                  top: `${speck.top}px`,
-                  width: `${SPECK.boxWidth}px`,
-                  height: `${SPECK.boxHeight}px`,
-                }}
-              >
-                <span
-                  className="block bg-creatives-banners-cyan-surface opacity-40"
-                  style={{
-                    width: `${SPECK.size}px`,
-                    height: `${SPECK.size}px`,
-                    borderRadius: `${SPECK.radius}px`,
-                    transform: SPECK.transform,
-                  }}
-                />
-              </span>
-            ))}
+            <span
+              aria-hidden
+              className="absolute bg-no-repeat"
+              style={{
+                left: `${STEP_PATTERN.left}px`,
+                top: `${STEP_PATTERN.top}px`,
+                width: `${STEP_PATTERN.width}px`,
+                height: `${STEP_PATTERN.height}px`,
+                backgroundImage: `url(${STEP_PATTERN.src})`,
+                backgroundSize: `${STEP_PATTERN.width}px ${STEP_PATTERN.height}px`,
+              }}
+            />
 
             <Icon
               className="relative size-8 shrink-0 text-creatives-banners-cyan-tag"

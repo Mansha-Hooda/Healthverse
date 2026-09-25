@@ -24,14 +24,20 @@ export function ProgramCard({
   // inset ring paints the same 1px line without affecting layout.
   return (
     <article className="flex w-full flex-col items-center gap-md overflow-clip rounded-lg bg-base-white px-md pt-md pb-lg shadow-elevation-1 inset-ring-1 inset-ring-gray-light-mode-100">
-      {/* The export carries the banner's own 1px stroke, and fills the area
+      {/* Banner artwork is composited at 3x (936x318) by
+          scripts/build-program-banners.py — Figma only ever exports a node at
+          its natural 312x106, which is soft on a retina screen. The intrinsic
+          size is declared so next/image can serve a variant matching the
+          device's pixel ratio; `sizes` keeps the layout box at 312px.
+
+          The artwork carries the banner's own 1px stroke and fills the area
           outside its 8px radius with white; clipping at rounded-md removes
-          those corners and the card's white shows through. */}
+          those corners so the card's white shows through. */}
       <Image
         src={banner.src}
         alt={banner.alt}
-        width={312}
-        height={106}
+        width={936}
+        height={318}
         sizes="312px"
         className="h-[106px] w-[312px] rounded-md"
       />

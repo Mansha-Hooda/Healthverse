@@ -16,14 +16,21 @@
  * the real artwork is a tilted wedge that thins toward the lower left. The
  * export is faithful and far less code.
  *
- * Placement is measured from the rendered frame: the pattern's own content
- * starts 4px into the 74px asset, and lands at x=43 on the card, so the
- * asset sits at x=39. Its right-hand columns overflow the 102px card and are
- * clipped by `overflow-clip`, which is what the design does too.
+ * Placement is measured from the rendered frame by comparing the asset's
+ * content row-by-row against the reference, rather than by eye:
+ *
+ *     card row y=3   reference x 43..94    asset row 3 starts at x 14
+ *     card row y=7   reference x 44..97    asset row 7 starts at x 15
+ *
+ * which pins the asset at x = 43 - 14 = 29. All three cards measure
+ * identically, so one placement serves them all.
+ *
+ * The asset's right-hand columns overflow the 102px card and are clipped by
+ * `overflow-clip`, as in the design.
  */
 export const STEP_PATTERN = {
   src: "/how-it-works/step-pattern.webp",
-  left: 39,
+  left: 29,
   top: 1,
   width: 74,
   height: 73,

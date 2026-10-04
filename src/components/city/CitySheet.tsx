@@ -36,7 +36,7 @@ export function CitySheet({ onSelect, onDismiss }: CitySheetProps) {
     [query],
   );
   const others = useMemo(
-    () => OTHER_CITIES.filter((city) => matches(city, query)),
+    () => OTHER_CITIES.filter((city) => matches(city.name, query)),
     [query],
   );
   const empty = popular.length === 0 && others.length === 0;
@@ -182,14 +182,33 @@ export function CitySheet({ onSelect, onDismiss }: CitySheetProps) {
               </h2>
               <ul className="flex flex-col">
                 {others.map((city) => (
-                  <li key={city}>
-                    <button
-                      type="button"
-                      onClick={() => onSelect(city)}
-                      className="m-body-m-regular flex w-full items-center border-b border-border-secondary py-xl text-left text-textcolor-grey-900-primary"
-                    >
-                      {city}
-                    </button>
+                  <li key={city.name}>
+                    {city.programs === null ? (
+                      /* Not served yet: a plain row rather than a disabled
+                         button, since there is nothing to activate. Left
+                         readable so screen readers still announce it. */
+                      <div className="flex w-full items-center justify-between border-b border-border-secondary pt-md pb-xl">
+                        <span className="m-body-m-regular text-textcolor-grey-500-disabled">
+                          {city.name}
+                        </span>
+                        <span className="m-label-s-medium rounded-xl bg-gray-light-mode-50 px-[0.625rem] py-xs text-textcolor-grey-700-secondary">
+                          Coming Soon
+                        </span>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => onSelect(city.name)}
+                        className="flex w-full items-center justify-between border-b border-border-secondary pt-md pb-xl text-left"
+                      >
+                        <span className="m-body-m-regular text-textcolor-grey-900-primary">
+                          {city.name}
+                        </span>
+                        <span className="m-body-m-regular text-textcolor-green-600">
+                          {city.programs} {city.programs === 1 ? "program" : "programs"}
+                        </span>
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>

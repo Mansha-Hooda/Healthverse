@@ -29,40 +29,57 @@ export const POPULAR_CITIES: PopularCity[] = [
   { name: "Mumbai", icon: "/city/city-mumbai.svg", width: 48, height: 48 },
 ];
 
-/** PLACEHOLDER — see the note above. Alphabetical by city name. */
-export const OTHER_CITIES: string[] = [
-  "Ajmer, Rajasthan",
-  "Amritsar, Punjab",
-  "Bhopal, Madhya Pradesh",
-  "Bhubaneswar, Odisha",
-  "Chandigarh, Punjab",
-  "Coimbatore, Tamil Nadu",
-  "Dehradun, Uttarakhand",
-  "Faridabad, Haryana",
-  "Ghaziabad, Uttar Pradesh",
-  "Gurugram, Haryana",
-  "Guwahati, Assam",
-  "Indore, Madhya Pradesh",
-  "Jaipur, Rajasthan",
-  "Jodhpur, Rajasthan",
-  "Kanpur, Uttar Pradesh",
-  "Kochi, Kerala",
-  "Lucknow, Uttar Pradesh",
-  "Ludhiana, Punjab",
-  "Madurai, Tamil Nadu",
-  "Mysuru, Karnataka",
-  "Nagpur, Maharashtra",
-  "Nashik, Maharashtra",
-  "Noida, Uttar Pradesh",
-  "Patna, Bihar",
-  "Raipur, Chhattisgarh",
-  "Rajkot, Gujarat",
-  "Ranchi, Jharkhand",
-  "Surat, Gujarat",
-  "Thiruvananthapuram, Kerala",
-  "Vadodara, Gujarat",
-  "Varanasi, Uttar Pradesh",
-  "Visakhapatnam, Andhra Pradesh",
+export type OtherCity = {
+  name: string;
+  /** How many programmes are on offer. `null` means the city is not served
+      yet, which renders as a greyed row with a "Coming Soon" tag and cannot
+      be selected. */
+  programs: number | null;
+};
+
+/**
+ * PLACEHOLDER — see the note at the top of this file.
+ *
+ * The first five entries carry the exact names and counts from the Figma
+ * frame. Everything else, including every other programme count and which
+ * cities are "Coming Soon", is invented to exercise the UI. None of it
+ * describes real MediBuddy coverage or inventory.
+ *
+ * Alphabetical by city name.
+ */
+export const OTHER_CITIES: OtherCity[] = [
+  { name: "Ajmer, Rajasthan", programs: 12 },
+  { name: "Amritsar, Punjab", programs: 6 },
+  { name: "Bhopal, Madhya Pradesh", programs: 4 },
+  { name: "Bhubaneswar, Odisha", programs: null },
+  { name: "Chandigarh, Haryana", programs: null },
+  { name: "Coimbatore, Tamil Nadu", programs: null },
+  { name: "Dehradun, Uttarakhand", programs: 3 },
+  { name: "Faridabad, Haryana", programs: 4 },
+  { name: "Ghaziabad, Uttar Pradesh", programs: 7 },
+  { name: "Gurugram, Haryana", programs: 15 },
+  { name: "Guwahati, Assam", programs: null },
+  { name: "Indore, Madhya Pradesh", programs: 8 },
+  { name: "Jaipur, Rajasthan", programs: 11 },
+  { name: "Jodhpur, Rajasthan", programs: 3 },
+  { name: "Kanpur, Uttar Pradesh", programs: 5 },
+  { name: "Kochi, Kerala", programs: 9 },
+  { name: "Lucknow, Uttar Pradesh", programs: 10 },
+  { name: "Ludhiana, Punjab", programs: 4 },
+  { name: "Madurai, Tamil Nadu", programs: null },
+  { name: "Mysuru, Karnataka", programs: 6 },
+  { name: "Nagpur, Maharashtra", programs: 7 },
+  { name: "Nashik, Maharashtra", programs: 5 },
+  { name: "Noida, Uttar Pradesh", programs: 14 },
+  { name: "Patna, Bihar", programs: 4 },
+  { name: "Raipur, Chhattisgarh", programs: null },
+  { name: "Rajkot, Gujarat", programs: 3 },
+  { name: "Ranchi, Jharkhand", programs: null },
+  { name: "Surat, Gujarat", programs: 8 },
+  { name: "Thiruvananthapuram, Kerala", programs: 5 },
+  { name: "Vadodara, Gujarat", programs: 6 },
+  { name: "Varanasi, Uttar Pradesh", programs: 4 },
+  { name: "Visakhapatnam, Andhra Pradesh", programs: 7 },
 ];
 
 /** Where the chosen city is remembered between visits. */

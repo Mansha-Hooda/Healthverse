@@ -44,6 +44,9 @@
      with brand-blue/600, but Figma names it separately, so it is kept
      separate here too. */
   --color-textcolor-blue-600: #0066dc;
+  /* textcolor/Green 600 — the city sheet's programme counts. Same value as
+     Colors/green/600, kept separate for the same reason. */
+  --color-textcolor-green-600: #26935f;
 
   /* --- Figma: colors/border ✅/<name> -------------------------------------
      Two collections define border-secondary: the ✅ one used by the city

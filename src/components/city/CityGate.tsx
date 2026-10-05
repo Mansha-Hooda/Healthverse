@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatedHeader } from "@/components/site/hero/AnimatedHeader";
 import { CitySheet } from "./CitySheet";
 import {
@@ -31,6 +31,19 @@ export function CityGate({ children }: { children: React.ReactNode }) {
     setCity(next);
     setReopened(false);
   }, []);
+
+  /* The layout's pre-paint script sets data-has-city so a returning visitor
+     never sees the gate flash, and a CSS rule hides it while that attribute
+     is present. That rule must only cover the window before hydration: left
+     set, it also hides the sheet when the header's location deliberately
+     reopens it, which looks like a dead control and strands the page with a
+     scroll lock and nothing visible. Drop the flag as soon as React knows
+     the city and can decide for itself. */
+  useEffect(() => {
+    if (city !== undefined) {
+      document.documentElement.removeAttribute("data-has-city");
+    }
+  }, [city]);
 
   /* Gated unless a city is known. `undefined` — storage not read yet, which
      is also what the server renders — counts as gated, so the sheet is in the

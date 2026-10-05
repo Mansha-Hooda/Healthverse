@@ -1,44 +1,12 @@
-import {
-  ProgramCard,
-  type ProgramCardProps,
-} from "@/components/site/programs/ProgramCard";
+import { ProgramCard } from "@/components/site/programs/ProgramCard";
+import { PROGRAMS } from "@/components/site/programs/catalog";
 
-const PROGRAMS: ProgramCardProps[] = [
-  {
-    banner: {
-      src: "/programs/banner-cult-pro.webp",
-      alt: "By partner cult.fit Pro",
-    },
-    name: "Cult Pro + OnePass",
-    duration: "12 months",
-    price: "₹9,297 (including taxes)",
-  },
-  {
-    banner: {
-      src: "/programs/banner-fitpass.webp",
-      alt: "By partner FITPASS",
-    },
-    name: "FITPASS",
-    duration: "12 months",
-    price: "₹10,724 (including taxes)",
-  },
-  {
-    banner: {
-      src: "/programs/banner-cult-elite.webp",
-      alt: "By partner cult.fit Elite",
-    },
-    name: "Cult Elite",
-    duration: "12 months",
-    price: "₹15,225 (including taxes)",
-  },
-];
-
-/** Featured Programs — Figma node 1050:6683. */
+/** Featured Programs — Figma node 1050:6683; the card list is 1050:6689. */
 export function FeaturedPrograms() {
   return (
     <section
       aria-labelledby="featured-programs"
-      className="flex flex-col gap-xl px-xl pt-4xl"
+      className="flex flex-col gap-xl pt-4xl"
     >
       <h2
         id="featured-programs"
@@ -47,9 +15,9 @@ export function FeaturedPrograms() {
         Featured Programs
       </h2>
 
-      <div className="flex flex-col gap-2xl">
-        {PROGRAMS.map((program) => (
-          <ProgramCard key={program.name} {...program} />
+      <div className="flex flex-col gap-xl">
+        {PROGRAMS.map(({ slug, card }) => (
+          <ProgramCard key={slug} {...card} />
         ))}
 
         {/* Inset ring rather than a border, so the button stays 44px tall —

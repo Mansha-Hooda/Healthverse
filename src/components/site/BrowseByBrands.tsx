@@ -26,7 +26,7 @@ export function BrowseByBrands() {
   return (
     <section
       aria-labelledby="browse-by-brands"
-      className="flex flex-col gap-xl px-xl pt-3xl"
+      className="flex flex-col gap-xl pt-3xl"
     >
       <h2
         id="browse-by-brands"

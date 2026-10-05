@@ -1,4 +1,8 @@
 @import "tailwindcss";
+/* Generated keyframes for the animated header. Unlayered on purpose: the
+   `.hv-*` rules drive opacity/rotate/scale/translate directly, and unlayered
+   CSS outranks Tailwind's utilities layer whatever the source order. */
+@import "./hero-animation.css";
 
 /* ==========================================================================
    Design tokens — named after the Figma component annotations.
@@ -47,6 +51,8 @@
   /* textcolor/Green 600 — the city sheet's programme counts. Same value as
      Colors/green/600, kept separate for the same reason. */
   --color-textcolor-green-600: #26935f;
+  /* textcolor/Green 700 — the review card's verified badge. */
+  --color-textcolor-green-700: #0f7a48;
 
   /* --- Figma: colors/border ✅/<name> -------------------------------------
      Two collections define border-secondary: the ✅ one used by the city
@@ -198,6 +204,35 @@
   --color-orange-900: #693200;
   --color-orange-950: #492300;
 
+  /* --- Figma: colors/success/<step>, colors/warning/<step> ---------------
+     Semantic names the animated header's tags bind to. In Figma they point
+     at the same ramps as colors/green and colors/orange, so they alias here
+     rather than repeating the values and letting the two drift apart. Only
+     the steps the design uses are aliased. */
+  --color-success-50: var(--color-green-50);
+  --color-success-100: var(--color-green-100);
+  --color-warning-50: var(--color-orange-50);
+  --color-warning-100: var(--color-orange-100);
+
+  /* Figma: Dark — Hugeicons' default stroke, which the program details page
+     uses for its two collapse chevrons. */
+  --color-dark: #141b34;
+
+  /* Figma: Neutral/Grey 100 — the row rules inside the order summary card.
+     Its own collection; sits between gray-light-mode 100 and 200. */
+  --color-neutral-grey-100: #d2d8e0;
+
+  /* Figma: Shadow/Elevation 3 — the confirmation screen's sticky CTA. */
+  --shadow-elevation-3: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 20px rgba(0, 0, 0, 0.04);
+
+  /* --- Review carousel pagination, Figma node 1163:25978 -----------------
+     These two are raw hex in the design file — bound to no variable — and
+     neither sits on the gray-light-mode ramp (#9dabbd falls between 300 and
+     400, #e1e5ea between 50 and 100). Kept verbatim rather than snapped to
+     the nearest token, so the mismatch stays visible. */
+  --color-pagination-dot-active: #9dabbd;
+  --color-pagination-dot-idle: #e1e5ea;
+
   /* --- Figma: component-colors/components/buttons ✅/secondary-color ✅/ --- */
   /* button-secondary-color-bg */
   --color-button-secondary-bg: #ffffff;
@@ -206,7 +241,12 @@
   /* button-secondary-color-fg */
   --color-button-secondary-fg: #0066dc;
 
-  /* --- Figma: spacing-<step>. Names match the design file exactly. ------- */
+  /* --- Figma: spacing-<step>. Names match the design file exactly. -------
+     Careful with `none`: Tailwind resolves the whole spacing family against
+     these keys, so --spacing-none turns `max-w-none` into `max-width: 0`
+     rather than the built-in `max-width: none`. The same goes for any other
+     `*-none` utility that reads the spacing scale. Reach for `max-w-full`,
+     or set the property directly, instead of renaming the token. */
   --spacing-none: 0rem;
   --spacing-xxs: 0.125rem;
   --spacing-xs: 0.25rem;
@@ -253,6 +293,11 @@
   --shadow-xs: 0 1px 2px rgba(23, 27, 34, 0.05);
   /* Figma: Colors/Effects/Shadows 📌/shadow-xs, applied as a filter */
   --drop-shadow-xs: 0 1px 1px rgba(23, 27, 34, 0.05);
+  /* The animated header's tag offset. Figma leaves this effect unnamed and
+     its colour unbound, so both the name and the token are ours; the value
+     is copied from node 1208:3049. #001e49 is not on the brand-blue ramp —
+     brand-blue/950 is #001846 — so it is written literally. */
+  --shadow-hero-tag: 5px 6px 0 #001e49;
 
   /* --- Mobile frame -------------------------------------------------------
      Not a Figma token — the 360px artboard width, held as a variable so the
@@ -297,6 +342,32 @@
     letter-spacing: 0;
   }
 
+  /* Figma: Mobile/M-Caption/XS-regular — 8/12. The "Sponsored" badge on the
+     beneficiary cards, and nothing else so far. */
+  .m-caption-xs-regular {
+    font-size: 0.5rem;
+    line-height: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  /* Figma: Mobile/M-Caption/S-regular — 10/16. Same box as M-Label/S-* but a
+     separate style family in Figma, so it keeps its own name here. */
+  .m-caption-s-regular {
+    font-size: 0.625rem;
+    line-height: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  /* Figma: Mobile/M-Body/S-light — 12/20. The details page's review body. */
+  .m-body-s-light {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 0;
+  }
+
   /* Figma: Mobile/M-Body/M-regular — 14/20 */
   .m-body-m-regular {
     font-size: 0.875rem;
@@ -312,6 +383,15 @@
     font-size: 0.75rem;
     line-height: 1.25rem;
     font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* Figma: Mobile/M-Title/S-medium — 12/20. The program card's "/year"
+     billing-period suffix. */
+  .m-title-s-medium {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 500;
     letter-spacing: 0;
   }
 
@@ -335,6 +415,15 @@
   .m-title-l-semibold {
     font-size: 1rem;
     line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* Figma: Mobile/Caption/M-semibold — 12/18. Marketing scale. Note the 18px
+     line height: M-Title/S-semibold is also 12px but leads at 20. */
+  .caption-m-semibold {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
     font-weight: 600;
     letter-spacing: 0;
   }
@@ -377,6 +466,27 @@
     font-weight: 600;
     letter-spacing: 0;
   }
+
+  /* The animated header's two display sizes, node 1208:3049. Neither is a
+     named Figma text style — the designer set the metrics on the layer — so
+     these names are ours, like .marketing-display-xs-* above. Both are
+     Lexend Deca Bold, which no other style in this file uses. */
+
+  /* 44/48, tracking -1.32px — the "programs" word. */
+  .hero-word-bold {
+    font-size: 2.75rem;
+    line-height: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.0825rem;
+  }
+
+  /* 28/36, tracking 0.28px — the tag words. */
+  .hero-tag-bold {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    letter-spacing: 0.0175rem;
+  }
 }
 
 /* ==========================================================================
@@ -406,4 +516,13 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* The city gate is rendered by default, so the landing page is never usable
+   before a city is chosen — not even in the window before hydration. For a
+   visitor who has already chosen, the inline script in layout.tsx sets this
+   attribute before first paint and the gate never shows. React then drops it
+   from the DOM once the store has been read. */
+html[data-has-city] [data-city-gate] {
+  display: none;
 }

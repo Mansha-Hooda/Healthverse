@@ -32,7 +32,16 @@ OUT_DIR = os.path.join(ROOT, "src", "components", "icons")
 # file carries #2E3742 in a legacy collection, and the handoff annotation
 # specifies #252D38. Emitting currentColor lets each call site supply the
 # token instead.
-INHERIT = ("#252D38", "#2E3742", "#1CA6C1", "#0066DC")
+INHERIT = ("#252D38", "#2E3742", "#1CA6C1", "#0066DC", "#141B34")
+
+# Multi-coloured icons cannot collapse to a single currentColor, but their
+# colours still have tokens — emit var() so the palette stays single-sourced.
+TOKENED = {
+    "#F1F8F5": "--color-success-50",
+    "#0F7A48": "--color-textcolor-green-700",
+    "#F1F7FF": "--color-brand-blue-25",
+    "#004FB6": "--color-brand-blue-700",
+}
 
 BOX = 24.0  # every header icon box, in px
 
@@ -52,22 +61,29 @@ def viewbox(svg):
 
 
 def jsxify(svg):
-    for a, b in (
-        ("stroke-width", "strokeWidth"),
-        ("stroke-linecap", "strokeLinecap"),
-        ("stroke-linejoin", "strokeLinejoin"),
-        ("stroke-miterlimit", "strokeMiterlimit"),
-        ("fill-rule", "fillRule"),
-        ("clip-rule", "clipRule"),
-    ):
-        svg = svg.replace(a, b)
+    """Rename hyphenated SVG attributes to the camelCase React expects.
+
+    This was a hand-maintained list and it kept springing leaks — first
+    `clip-path`, then `stroke-dasharray`, each surfacing only as a console
+    error at runtime. Converting every hyphenated attribute instead closes
+    the whole class. `data-`, `aria-` and namespaced attributes are the
+    documented exceptions: React passes those through verbatim.
+    """
+    def camel(match):
+        name = match.group(1)
+        if name.startswith(("data-", "aria-", "xml", "xlink")):
+            return match.group(0)
+        head, *rest = name.split("-")
+        return head + "".join(part.capitalize() for part in rest) + "="
+
+    svg = re.sub(r"\b([a-z]+(?:-[a-z]+)+)=", camel, svg)
     # Drop Figma's layer ids — they collide once several icons share a page.
     svg = re.sub(r'\sid="[^"]*"', "", svg)
     return svg
 
 
-def recolor(svg):
-    for colour in INHERIT:
+def recolor(svg, extra=()):
+    for colour in INHERIT + tuple(extra):
         svg = svg.replace(colour, "currentColor").replace(colour.lower(), "currentColor")
     return svg
 
@@ -79,6 +95,37 @@ def indent(text, pad):
 def simple(file):
     svg = read(file)
     return viewbox(svg), recolor(jsxify(inner(svg)))
+
+
+def tokenise(svg):
+    for value, token in TOKENED.items():
+        for form in (value, value.lower()):
+            svg = svg.replace(f'"{form}"', f'"var({token})"')
+    return svg
+
+
+def simple_tokened(file):
+    """For multi-coloured icons: each colour becomes its design token."""
+    svg = read(file)
+    return viewbox(svg), tokenise(jsxify(inner(svg)))
+
+
+def simple_inherit_brand(file):
+    """For glyphs drawn in brand-blue/700 that should take their call site's
+    colour — the plan-detail icons keep theirs as a token, so #004FB6 cannot
+    simply go in INHERIT."""
+    svg = read(file)
+    return viewbox(svg), recolor(jsxify(inner(svg)), extra=("#004FB6",))
+
+
+def simple_on_dark(file):
+    """For icons drawn in literal `white` because they sit on a dark surface.
+
+    `white` is NOT in INHERIT: the wallet icon uses it as a genuine knockout
+    fill that must stay white whatever the icon colour is.
+    """
+    svg = read(file)
+    return viewbox(svg), recolor(jsxify(inner(svg)), extra=("white",))
 
 
 def composed(fragments):
@@ -137,6 +184,51 @@ GROUPS = {
         "faq node 1050:6950",
         [
             ("IconChevronDown", simple, "chevron-down.svg"),
+        ],
+    ),
+    "hero-animated.tsx": (
+        "animated header node 1208:3049",
+        [
+            ("IconCheckmarkBadge02", simple_on_dark, "checkmark-badge-02.svg"),
+        ],
+    ),
+    "reviews.tsx": (
+        "user reviews node 1050:6778",
+        [
+            ("IconVerifiedBadge", simple_tokened, "verified-badge.svg"),
+        ],
+    ),
+    "program-details.tsx": (
+        "program details node 1050:14678",
+        [
+            ("IconPlanUnlimited", simple_tokened, "plan-unlimited.svg"),
+            ("IconPlanCredits", simple_tokened, "plan-credits.svg"),
+            ("IconPlanWorkout", simple_tokened, "plan-workout.svg"),
+            ("IconPlanAtHome", simple_tokened, "plan-athome.svg"),
+            ("IconArrowDown01", simple, "arrow-down-01.svg"),
+        ],
+    ),
+    "buy-sheet.tsx": (
+        "user details sheet node 1050:14266",
+        [
+            ("IconCancel01", simple, "cancel-01.svg"),
+            ("IconAdd01", simple_inherit_brand, "add-01.svg"),
+        ],
+    ),
+    "order.tsx": (
+        "payment confirmation node 1050:15076",
+        [
+            ("IconSuccessBadge", simple_tokened, "success-badge.svg"),
+            ("IconCheckmarkCircle02", simple, "checkmark-circle-02.svg"),
+            ("IconHelpCircle", simple, "help-circle.svg"),
+        ],
+    ),
+    "track-order.tsx": (
+        "track order sheet node 1050:11965",
+        [
+            ("IconStatusDone", simple_tokened, "status-done.svg"),
+            ("IconStatusPending", simple, "status-pending.svg"),
+            ("IconDownload04", simple_inherit_brand, "download-04.svg"),
         ],
     ),
     "how-it-works.tsx": (

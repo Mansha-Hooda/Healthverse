@@ -1,15 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { IconLocation06 } from "@/components/icons/header";
 import { IconSearch01 } from "@/components/icons/how-it-works";
+import { BottomSheet } from "@/components/ui/BottomSheet";
 import { OTHER_CITIES, POPULAR_CITIES } from "./constants";
 
 type CitySheetProps = {
   onSelect: (city: string) => void;
   /** Omitted while no city is chosen yet, which makes the sheet mandatory. */
   onDismiss?: () => void;
+  /**
+   * Close when the backdrop is clicked. Opt-in: the landing page's sheet is
+   * a gate, so tapping past it there must not dismiss it.
+   */
+  dismissOnOutsideClick?: boolean;
 };
 
 /** Matches a city if every word of the query appears in it. */
@@ -26,10 +32,13 @@ function matches(city: string, query: string) {
  * prices depend on it. The header and search stay put while the two city
  * lists scroll.
  */
-export function CitySheet({ onSelect, onDismiss }: CitySheetProps) {
+export function CitySheet({
+  onSelect,
+  onDismiss,
+  dismissOnOutsideClick = false,
+}: CitySheetProps) {
   const [query, setQuery] = useState("");
   const searchId = useId();
-  const dialogRef = useRef<HTMLDivElement>(null);
 
   const popular = useMemo(
     () => POPULAR_CITIES.filter((city) => matches(city.name, query)),
@@ -41,72 +50,12 @@ export function CitySheet({ onSelect, onDismiss }: CitySheetProps) {
   );
   const empty = popular.length === 0 && others.length === 0;
 
-  /* Escape closes the sheet, but only once a city exists to fall back on. */
-  useEffect(() => {
-    if (!onDismiss) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onDismiss();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onDismiss]);
-
-  /* Hold focus inside the sheet: it covers the page, so tabbing out would
-     land on controls the user cannot see. */
-  useEffect(() => {
-    const node = dialogRef.current;
-    if (!node) return;
-    const focusable = () =>
-      [
-        ...node.querySelectorAll<HTMLElement>(
-          'button, input, [href], [tabindex]:not([tabindex="-1"])',
-        ),
-      ].filter((el) => !el.hasAttribute("disabled"));
-
-    focusable()[0]?.focus();
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key !== "Tab") return;
-      const items = focusable();
-      if (!items.length) return;
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    node.addEventListener("keydown", onKey);
-    return () => node.removeEventListener("keydown", onKey);
-  }, []);
-
-  /* The page behind must not scroll while the sheet is up. */
-  useEffect(() => {
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previous;
-    };
-  }, []);
-
   return (
-    <div className="fixed inset-0 z-50 mx-auto flex w-(--container-frame) items-end bg-black/60">
-      <div
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={`${searchId}-title`}
-        className="flex max-h-[75%] w-full flex-col overflow-clip rounded-tl-4xl rounded-tr-4xl bg-base-white pb-3xl shadow-drop-normal"
-      >
-        {/* Drag handle — decorative here; the sheet is dismissed by choosing
-            a city, or Escape once one is already set. */}
-        <div aria-hidden className="flex justify-center px-xl py-lg">
-          <span className="h-1 w-10 rounded-full bg-gray-light-mode-100" />
-        </div>
-
+    <BottomSheet
+      labelledBy={`${searchId}-title`}
+      onDismiss={onDismiss}
+      dismissOnOutsideClick={dismissOnOutsideClick}
+    >
         <div className="flex flex-col gap-xl px-xl">
           <div className="flex flex-col gap-xl">
             <p className="flex items-center gap-xs">
@@ -204,8 +153,12 @@ export function CitySheet({ onSelect, onDismiss }: CitySheetProps) {
                         <span className="m-body-m-regular text-textcolor-grey-900-primary">
                           {city.name}
                         </span>
-                        <span className="m-body-m-regular text-textcolor-green-600">
-                          {city.programs} {city.programs === 1 ? "program" : "programs"}
+                        {/* The Sep26 sheet (1172:40186) replaced the programme
+                            count with a plain availability tag, mirroring the
+                            Coming Soon one. `programs` still carries the count
+                            — it is simply no longer shown. */}
+                        <span className="m-label-s-medium rounded-xl bg-success-100 px-[0.625rem] py-xs text-textcolor-green-700">
+                          Available
                         </span>
                       </button>
                     )}
@@ -224,7 +177,6 @@ export function CitySheet({ onSelect, onDismiss }: CitySheetProps) {
             </p>
           )}
         </div>
-      </div>
-    </div>
+    </BottomSheet>
   );
 }

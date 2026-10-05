@@ -40,7 +40,7 @@ export function HowItWorks() {
   return (
     <section
       aria-labelledby="how-it-works"
-      className="flex flex-col gap-xl px-xl pt-4xl"
+      className="flex flex-col gap-xl pt-4xl"
     >
       <h2
         id="how-it-works"

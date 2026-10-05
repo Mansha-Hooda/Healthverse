@@ -48,7 +48,7 @@ export function Faq() {
   return (
     <section
       aria-labelledby="faq"
-      className="flex flex-col gap-xl px-xl pt-4xl"
+      className="flex flex-col gap-xl pt-4xl"
     >
       <h2
         id="faq"

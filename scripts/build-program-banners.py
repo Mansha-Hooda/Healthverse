@@ -29,7 +29,12 @@ FONTS = os.path.join(ROOT, ".figma-ref", "fonts")
 OUT = os.path.join(ROOT, "public", "programs")
 
 SCALE = 3
-BANNER_W, BANNER_H = 312, 106
+# All the geometry below is authored against the card banner's 312px width.
+# The details page (1053:10613) reuses the same artwork at 328x112, which
+# Figma produces by multiplying every value by 328/312 — so a single unit
+# scale, set per banner by build(), covers it.
+BASE_W, BASE_H = 312, 106
+_UNIT = 1.0
 RADIUS = 8  # banner corner, radius-md
 
 # Supersampling for rotated shapes: drawn large, rotated, then downsampled so
@@ -89,16 +94,37 @@ LABEL_SIZE, LABEL_LINE = 10, 16          # m-label-s-semibold
 TIER_SIZE, TIER_LINE = 14, 20            # m-title-m-medium
 TEXT_PRIMARY = (37, 45, 56, 255)         # textcolor/Grey 900 - Primary
 
+# `offset` is the X in Figma's `top: calc(50% - Xpx)` on the Partner Info
+# block. Each card uses a different one: the Sep26 design adds a price line
+# under the logo and, on two of the three, a tag strip across the bottom, so
+# the branding sits higher the more there is below it. The price line and the
+# tag strip are NOT baked in — see ProgramCard for why.
 BANNERS = [
     dict(out="banner-cult-pro.webp", theme="cyan", art="cult",
          logo="cultfit-logo.png", logo_w=66.722, logo_h=25.121,
-         tier="Pro", offset=0.44),
+         tier="Pro", offset=23.44),
     dict(out="banner-fitpass.webp", theme="pink", art="fitpass",
          logo="fitpass-logo.png", logo_w=102.292, logo_h=16,
-         tier=None, offset=0),
+         tier=None, offset=28),
     dict(out="banner-cult-elite.webp", theme="purple", art="cult",
          logo="cultfit-logo.png", logo_w=66.722, logo_h=25.121,
-         tier="Elite", offset=0.44),
+         tier="Elite", offset=5.44),
+
+    # Details page (1053:10613): same artwork at 328x112, and no price line,
+    # so the branding returns to the middle. Figma quotes offset 0.74 for
+    # Cult Pro, which is exactly the centred block scaled up — the card's
+    # pre-Sep26 centre of 52.56 x 328/312 = 55.26, and 56 - 55.26 = 0.74. The
+    # other two are derived the same way rather than guessed: FITPASS centres
+    # at 53 (its logo has no tier label beside it), giving 56 - 55.72 = 0.28.
+    dict(out="details-cult-pro.webp", theme="cyan", art="cult",
+         logo="cultfit-logo.png", logo_w=66.722, logo_h=25.121,
+         tier="Pro", offset=0.74, size=(328, 112), angle=-64.9257573026741),
+    dict(out="details-fitpass.webp", theme="pink", art="fitpass",
+         logo="fitpass-logo.png", logo_w=102.292, logo_h=16,
+         tier=None, offset=0.28, size=(328, 112), angle=-64.9257573026741),
+    dict(out="details-cult-elite.webp", theme="purple", art="cult",
+         logo="cultfit-logo.png", logo_w=66.722, logo_h=25.121,
+         tier="Elite", offset=0.74, size=(328, 112), angle=-64.9257573026741),
 ]
 
 
@@ -108,8 +134,8 @@ def hex_rgb(value):
 
 
 def px(value):
-    """1x banner units -> output pixels."""
-    return value * SCALE
+    """Authored (312-wide) banner units -> output pixels."""
+    return value * SCALE * _UNIT
 
 
 def gradient(size, angle_deg, start, end, stops):
@@ -185,16 +211,24 @@ def draw_line(canvas, text, font, left, line_top, line_height, fill):
 
 
 def build(spec):
+    global _UNIT
     theme = THEMES[spec["theme"]]
     c100, c25 = hex_rgb(theme["c100"]), hex_rgb(theme["c25"])
     art = ART[spec["art"]]
-    size = (px(BANNER_W), px(BANNER_H))
+
+    out_w, out_h = spec.get("size", (BASE_W, BASE_H))
+    _UNIT = out_w / BASE_W
+    # The details banner is 1px taller than a pure scale would give, so the
+    # authored height is derived from the output rather than assumed.
+    height = out_h / _UNIT
+    size = (round(out_w * SCALE), round(out_h * SCALE))
 
     # White base, so the area outside the rounded corners matches the card.
     canvas = Image.new("RGBA", size, WHITE)
 
     # Gradient, clipped to the banner's rounded rectangle.
-    grad = gradient(size, GRADIENT_ANGLE, c100, c25, GRADIENT_STOPS).convert("RGBA")
+    angle = spec.get("angle", GRADIENT_ANGLE)
+    grad = gradient(size, angle, c100, c25, GRADIENT_STOPS).convert("RGBA")
     mask = Image.new("L", size, 0)
     ImageDraw.Draw(mask).rounded_rectangle(
         [0, 0, size[0] - 1, size[1] - 1], radius=px(RADIUS), fill=255
@@ -254,12 +288,12 @@ def build(spec):
     # Banner stroke.
     ImageDraw.Draw(canvas).rounded_rectangle(
         [0, 0, size[0] - 1, size[1] - 1], radius=px(RADIUS),
-        outline=c100 + (255,), width=SCALE,
+        outline=c100 + (255,), width=round(SCALE * _UNIT),
     )
 
     # Partner block, vertically centred with the design's small nudge.
     block_h = LABEL_LINE + PARTNER_GAP + spec["logo_h"]
-    block_top = BANNER_H / 2 - spec["offset"] - block_h / 2
+    block_top = height / 2 - spec["offset"] / _UNIT - block_h / 2
 
     draw_line(canvas, LABEL, load_font(600, LABEL_SIZE),
               PARTNER_LEFT, block_top, LABEL_LINE, TEXT_PRIMARY)
